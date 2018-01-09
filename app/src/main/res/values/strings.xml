@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PlanoDeCarreira</string>
+    <string name="usuario">Usuário</string>
+    <string name="Password">Password</string>
+    <string name="Senha">Senha</string>
+    <string name="Administrador">Administrador</string>
+    <string name="senha">Senha</string>
+    <string name="selecione_o_perfil">Selecione o Perfil</string>
+    <string name="acessar">Acessar</string>
+    <string name="memorizar_senha">Memorizar Senha</string>
+    <string name="unknown_error">Erro Desconhecido!</string>
+    <string name="empty_user">Informe o usuário!</string>
+    <string name="empty_password">Informe a senha!</string>
+    <string name="credentials_invalid">Usuário e/ou Senha incorretos</string>
+    <string name="confirm_not_a_robot">Confirm not a robot</string>
+    <string name="salvar_us_rio">Salvar Usário</string>
+    <string name="salvar_usuario">Salvar Usuário</string>
+</resources>
