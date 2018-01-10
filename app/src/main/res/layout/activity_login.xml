@@ -55,6 +55,7 @@
                         android:layout_height="match_parent"
                         android:inputType="textEmailAddress"
                         android:orientation="horizontal"
+                        android:fontFamily="sans-serif"
                         />
 
 
@@ -82,6 +83,9 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:maxLength="30"
+                        android:fontFamily="sans-serif"
+
+
                         />
 
 
@@ -97,17 +101,19 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
 
-                <CheckBox
+                <CheckedTextView
                     android:id="@+id/recaptcha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:drawableLeft="@drawable/ic_nocaptcha"
                     android:text="Você é um humano?"
                     android:clickable="true"
-                    android:drawableRight="@drawable/ic_nocaptcha"
-                    android:onClick="recaptchaClick"/>
+                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                    />
 
                 <Switch
                     android:id="@+id/sw_salvar_usuario"
@@ -117,7 +123,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:checked="true"
-                    android:text="Lembrar Usuário"
+                    android:text="@string/salvar_usuario"
                     android:textSize="12dp" />
                 </RelativeLayout>
 

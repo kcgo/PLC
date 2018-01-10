@@ -2,23 +2,26 @@ package sample.tqi.com.br.planodecarreira.f_login;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.content.Loader;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -39,8 +42,8 @@ import sample.tqi.com.br.planodecarreira.util.DataStorage;
 public class LoginActivity extends Activity implements LoginView {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
-    public static final String SITE_KEY = "6LfEzD8UAAAAAFt-MIRl3OzSxGBCN3totM3wtmPe";
-    public static final String SITE_SECRET_KEY = "6LfEzD8UAAAAAIKdVayFXOku7qe49iUuB_T8q0gJ";
+    public static final String SITE_KEY="6LfEzD8UAAAAAFt-MIRl3OzSxGBCN3totM3wtmPe";
+    public static final String SITE_SECRET_KEY="6LfEzD8UAAAAAIKdVayFXOku7qe49iUuB_T8q0gJ";
     String userResponseToken;
 
     private WaitDialog waitDialog;
@@ -51,29 +54,31 @@ public class LoginActivity extends Activity implements LoginView {
     private EditText edit_text_usuário;
     private EditText edit_text_senha;
     private Switch sw_salvar_usuario;
-    private Button btn_Recaptcha;
+    private CheckedTextView btn_Recaptcha;
     private View v;
+    private Button bt_acessar;
 
     private String user_name;
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
-        super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.activity_login);
+        super.onCreate( savedInstanceState );
+        Fabric.with( this, new Crashlytics() );
+        setContentView( R.layout.activity_login );
+
 
         loginPresenter = new LoginPresenter();
-        loginPresenter.attachView(this);
+        loginPresenter.attachView( this );
         waitDialog = new WaitDialog(this);
         userResponseToken = "";
 
-        edit_text_usuário = findViewById(R.id.edit_text_usuário);
-        edit_text_senha = findViewById(R.id.edit_text_senha);
-        sw_salvar_usuario = findViewById(R.id.sw_salvar_usuario);
-        btn_Recaptcha = findViewById(R.id.recaptcha);
+        edit_text_usuário = findViewById( R.id.edit_text_usuário );
+        edit_text_senha = findViewById( R.id.edit_text_senha );
+        sw_salvar_usuario = findViewById( R.id.sw_salvar_usuario );
+        btn_Recaptcha = findViewById( R.id.recaptcha );
 
-        Button button = findViewById(R.id.bt_acessar);
-        button.setOnClickListener(view -> {
+        Button button = findViewById( R.id.bt_acessar );
+        button.setOnClickListener( view -> {
             if (fieldsValidade()) {
                 waitDialog.show();
                 if (sw_salvar_usuario.isChecked()) {
@@ -101,92 +106,104 @@ public class LoginActivity extends Activity implements LoginView {
                 CharSequence text = "Informe todos os campos";
                 int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, text, duration);
+                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+            }
+        } );
+
+        btn_Recaptcha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+
+                if (btn_Recaptcha.isChecked())
+                    btn_Recaptcha.setChecked(false);
+                else {
+                    SafetyNet.getClient(LoginActivity.this).verifyWithRecaptcha(SITE_KEY)
+                            .addOnSuccessListener(LoginActivity.this, new OnSuccessListener <SafetyNetApi.RecaptchaTokenResponse>() {
+                                @Override
+                                public void onSuccess( SafetyNetApi.RecaptchaTokenResponse response ) {
+                                    userResponseToken = response.getTokenResult();
+
+                                    if (!userResponseToken.isEmpty()) {
+                                        sendRequest();
+                                    }
+                                }
+                            })
+                            .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
+                                public void onFailure( @NonNull Exception e ) {
+                                    if (e instanceof ApiException) {
+                                        ApiException apiException = (ApiException) e;
+                                        Log.d(TAG, "Error message: " +
+                                                CommonStatusCodes.getStatusCodeString(apiException.getStatusCode()));
+                                    } else {
+                                        Log.d(TAG, "Unknown type of error: " + e.getMessage());
+                                    }
+                                }
+                            });
+
+                }
+
+
             }
         });
 
+
         user_name = DataStorage.getUserName() != null ? DataStorage.getUserName() : "";
-        if (!user_name.equals("")) {
+        if (!user_name.equals("")){
             edit_text_usuário.setText(user_name);
         }
+        ((InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE))
+                .toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+  /* start loader to check parameters ... */
     }
 
-    public Boolean fieldsValidade() {
+    /* loader finished */
+    public void onLoadFinished( Loader<Object> loader, Object data) {
+    /* parameters not valid ... */
+
+    /* show keyboard */
+        ((InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE))
+                .toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+    /* parameters valid ... */
+    }
+
+
+
+    public Boolean fieldsValidade(){
         Boolean retorno = true;
-        if (edit_text_senha.getText().toString().isEmpty()) {
+        if (edit_text_senha.getText().toString().isEmpty()){
             retorno = false;
-        } else if (edit_text_senha.getText().equals("")) {
-            retorno = false;
+        } else if (edit_text_senha.getText().equals(""))
+        {
+            retorno= false;
         }
         return retorno;
     }
 
-
-    public void onClickListner( View v ) {
-        CheckBox box = findViewById(R.id.recaptcha);
-        boolean checked = ((CheckBox) v).isChecked();
-
-        switch (v.getId()) {
-            case R.id.recaptcha:
-                if (checked) {
-                    box.setAnimation(box.getAnimation());
-                } else box.setAnimation(null);
-        }
-    }
-
-
-
-
-
-    public void recaptchaClick(View v){
-        SafetyNet.getClient(this).verifyWithRecaptcha(SITE_KEY)
-                .addOnSuccessListener(this, new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>() {
-                    @Override
-                    public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response) {
-                        userResponseToken = response.getTokenResult();
-                        if (!userResponseToken.isEmpty()) {
-                           sendRequest();
-                        }
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                       public void onFailure(@NonNull Exception e) {
-                        if (e instanceof ApiException) {
-                            ApiException apiException = (ApiException) e;
-                            Log.d(TAG, "Error message: " +
-                                    CommonStatusCodes.getStatusCodeString(apiException.getStatusCode()));
-                        } else {
-                            Log.d(TAG, "Unknown type of error: " + e.getMessage());
-                        }
-                    }
-                });
-    }
-
     public void sendRequest() {
         String url = "https://www.google.com/recaptcha/api/siteverify";
+        RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener <String>() {
-                    @Override
-                    public void onResponse( String response ) {
-                        try {
-                            JSONObject obj = new JSONObject( response );
-                            if (obj.getString( "success" ).equals( "true" )) {
-                               // moveNewActivity();
+                response -> {
+                    try {
+                        JSONObject obj = new JSONObject( response );
 
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+
+
+
+                        if (obj.getString( "success" ).equals( "true" )) {
+                            btn_Recaptcha.setChecked(true);
+
                         }
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse( VolleyError error ) {
-                    Toast.makeText( LoginActivity.this, error.getMessage(), Toast.LENGTH_LONG ).show();
-                }
-            }) {
+
+                },
+                error -> Toast.makeText( LoginActivity.this, error.getMessage(), Toast.LENGTH_LONG ).show()) {
 
             @Override
             protected Map <String, String> getParams() throws AuthFailureError {
@@ -196,6 +213,7 @@ public class LoginActivity extends Activity implements LoginView {
                 return params;
             }
         };
+        queue.add(stringRequest);
     }
 
     private void moveNewActivity() {
@@ -209,6 +227,7 @@ public class LoginActivity extends Activity implements LoginView {
         waitDialog.dismiss();
         moveNewActivity();
     }
+
 
     @Override
     public void showError( String message ) {
@@ -232,3 +251,4 @@ public class LoginActivity extends Activity implements LoginView {
         View v = inflater.inflate(R.layout.activity_login, container, false);
     }
 }
+

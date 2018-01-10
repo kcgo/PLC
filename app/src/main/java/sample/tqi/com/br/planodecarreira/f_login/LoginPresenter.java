@@ -11,9 +11,11 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import sample.tqi.com.br.planodecarreira.Presenter;
 import sample.tqi.com.br.planodecarreira.R;
+import sample.tqi.com.br.planodecarreira.model.domain.AuthTokenResponse;
 import sample.tqi.com.br.planodecarreira.model.service.ServiceGenerator;
 import sample.tqi.com.br.planodecarreira.model.service.UserApi;
 import sample.tqi.com.br.planodecarreira.util.Constants;
+import sample.tqi.com.br.planodecarreira.util.DataStorage;
 
 public class LoginPresenter implements Presenter<LoginView> {
 
@@ -26,7 +28,7 @@ public class LoginPresenter implements Presenter<LoginView> {
     }
 
     @Override
-    public void dettachView() {
+    public void dettachView( Context context ) {
         this.view = null;
         for(Subscription subscription : subscriptionList) {
             subscription.unsubscribe();
@@ -41,7 +43,8 @@ public class LoginPresenter implements Presenter<LoginView> {
         Subscription subscription = api.login(getAuthorization(), username, password, Constants.GRANT_PASSWORD)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(user -> {
+                .subscribe(( AuthTokenResponse user ) -> {
+                            DataStorage.setAccessToken(user.getAccessToken());
                             view.showSuccess();
                         },
                         error -> {
@@ -54,6 +57,7 @@ public class LoginPresenter implements Presenter<LoginView> {
         subscriptionList.add(subscription);
 
     }
+
 
     public void validadeCaptcha(final String username, String password, String token, final Context context) {
 
