@@ -23,7 +23,7 @@
             android:name="io.fabric.ApiKey"
             android:value="160cade2f8d88b6ecd3a18088b1a621f65acc4da"
             />
-        <activity android:name=".f_perfil_acesso.PerfilAcesso"></activity>
+        <activity android:name=".f_perfil_acesso.PerfilAcessoActivity"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

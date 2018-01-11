@@ -15,10 +15,8 @@ import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 
 public interface PerfilAcessoApi {
 
-
-    @FormUrlEncoded
     @GET("service/permissions")
-    Observable<List<PerfilAcesso>> getPerfilAcesso(@Header ("authoriztion") String authorization);
+    Observable<List<PerfilAcesso>> getPerfilAcesso(@Header ("Authorization") String authorization);
 
 
 }
