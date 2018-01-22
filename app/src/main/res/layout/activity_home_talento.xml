@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="sample.tqi.com.br.planodecarreira.f_home_talento.HomeTalentoActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_activity_home_talento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:id="@+id/sv_home_talento"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Módulo vigente"
+                android:textStyle="bold"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:elevation="2dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_modulo_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nome do módulo: "/>
+
+                    <TextView
+                        android:id="@+id/tv_modulo_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Módulo 1"
+                        android:textStyle="bold"
+                        android:layout_toRightOf="@+id/tv_modulo_title"/>
+
+                    <TextView
+                        android:id="@+id/tv_data_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data final: "
+                        android:layout_below="@id/tv_modulo_title"/>
+
+                    <TextView
+                        android:id="@+id/tv_data_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="11/10/2018"
+                        android:textStyle="bold"
+                        android:layout_below="@id/tv_modulo_title"
+                        android:layout_toRightOf="@+id/tv_data_title"/>
+
+                    <TextView
+                        android:id="@+id/tv_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:text="1/10"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorLigthOrange"
+                        android:layout_toRightOf="@+id/tv_modulo_value"/>
+
+                    <Button
+                        android:id="@+id/btn_task_home_talento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="Tarefas"
+                        android:layout_below="@id/tv_data_value"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Histórico de carreira"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="2dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_career_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:nestedScrollingEnabled="false"/>
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/card_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:fontFamily="sans-serif"
+                            android:textSize="14sp"
+                            android:padding="7dp"
+                            android:gravity="center"
+                            android:text="Não há nenhum histórico"/>
+
+                    </android.support.v7.widget.CardView>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

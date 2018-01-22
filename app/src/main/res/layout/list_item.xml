@@ -26,8 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_toEndOf="@+id/im_perfil"
-            android:layout_toRightOf="@+id/im_perfil"
+            android:layout_toEndOf="@+id/tx_perfil"
+            android:layout_toRightOf="@+id/tx_perfil"
             android:text="@string/Administrador" />
 
 

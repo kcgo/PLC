@@ -9,7 +9,4 @@ public interface LoginView {
     void showSuccess();
 
     void showError(String message);
-
-    void onCreateView( LayoutInflater inflater, ViewGroup container,
-                       Bundle savedInstanceState );
 }

@@ -1,8 +1,10 @@
 package sample.tqi.com.br.planodecarreira.f_login;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.inputmethodservice.InputMethodService;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -15,6 +17,7 @@ import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,15 +30,19 @@ import com.google.android.gms.safetynet.SafetyNet;
 import com.google.android.gms.safetynet.SafetyNetApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import io.fabric.sdk.android.Fabric;
 import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.f_perfil_acesso.PerfilAcessoActivity;
 import sample.tqi.com.br.planodecarreira.ui.WaitDialog;
 import sample.tqi.com.br.planodecarreira.util.DataStorage;
+import sample.tqi.com.br.planodecarreira.util.UIUtil;
 
 public class LoginActivity extends Activity implements LoginView {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -56,14 +63,15 @@ public class LoginActivity extends Activity implements LoginView {
     private View v;
     private Button bt_acessar;
 
+
     private String user_name;
+    private InputMethodService.InputMethodSessionImpl inputMethodManager;
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         Fabric.with( this, new Crashlytics() );
         setContentView( R.layout.activity_login );
-
 
         loginPresenter = new LoginPresenter();
         loginPresenter.attachView( this );
@@ -74,6 +82,8 @@ public class LoginActivity extends Activity implements LoginView {
         edit_text_senha = findViewById( R.id.edit_text_senha );
         sw_salvar_usuario = findViewById( R.id.sw_salvar_usuario );
         btn_Recaptcha = findViewById( R.id.recaptcha );
+
+
 
         Button button = findViewById( R.id.bt_acessar );
         button.setOnClickListener( view -> {
@@ -109,6 +119,7 @@ public class LoginActivity extends Activity implements LoginView {
             }
         } );
 
+
         btn_Recaptcha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
@@ -138,25 +149,20 @@ public class LoginActivity extends Activity implements LoginView {
                                     }
                                 }
                             });
-
                 }
-
-
             }
         });
-
 
         user_name = DataStorage.getUserName() != null ? DataStorage.getUserName() : "";
         if (!user_name.equals("")){
             edit_text_usuário.setText(user_name);
         }
-        ((InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE))
-                .toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+        ((InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 
-  /* start loader to check parameters ... */
+        // Habilita evento para esconder o teclado ao clicar fora de um campo.
+        UIUtil.searchAndHideSoftKeybordFromView(findViewById(android.R.id.content), LoginActivity.this);
     }
 
-    /* loader finished */
     public void onLoadFinished( Loader<Object> loader, Object data) {
     /* parameters not valid ... */
 
@@ -166,8 +172,6 @@ public class LoginActivity extends Activity implements LoginView {
 
     /* parameters valid ... */
     }
-
-
 
     public Boolean fieldsValidade(){
         Boolean retorno = true;
@@ -187,19 +191,12 @@ public class LoginActivity extends Activity implements LoginView {
                 response -> {
                     try {
                         JSONObject obj = new JSONObject( response );
-
-
-
-
-
                         if (obj.getString( "success" ).equals( "true" )) {
                             btn_Recaptcha.setChecked(true);
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 },
                 error -> Toast.makeText( LoginActivity.this, error.getMessage(), Toast.LENGTH_LONG ).show()) {
 
@@ -226,7 +223,6 @@ public class LoginActivity extends Activity implements LoginView {
         moveNewActivity();
     }
 
-
     @Override
     public void showError( String message ) {
         waitDialog.dismiss();
@@ -239,14 +235,4 @@ public class LoginActivity extends Activity implements LoginView {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
-
-    @Override
-    public void onCreateView( LayoutInflater inflater, ViewGroup container,
-                              Bundle savedInstanceState ) {
-        this.inflater = inflater;
-        this.container = container;
-        this.savedInstanceState = savedInstanceState;
-        View v = inflater.inflate(R.layout.activity_login, container, false);
-    }
 }
-

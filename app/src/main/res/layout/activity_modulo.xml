@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="sample.tqi.com.br.planodecarreira.f_modulo.ModuloActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_activity_modulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tx_descricao_tarefa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desenvolvimento de tela"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_nome_tutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peterson Farias"
+        android:textStyle="bold"
+        android:layout_gravity="right"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_data_i"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Data inicial: "/>
+
+        <TextView
+            android:id="@+id/tv_data_inicial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11/02/2018"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_data_f"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Data final:"/>
+
+        <TextView
+            android:id="@+id/tv_data_final"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="11/03/2018"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="Status: "/>
+
+        <TextView
+            android:id="@+id/tv_estado_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FINALIZADO"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:textStyle="bold"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_modulo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_modulo"
+        android:nestedScrollingEnabled="false"/>
+</LinearLayout>

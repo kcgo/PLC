@@ -9,10 +9,6 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/ln_layout_card"
@@ -56,6 +52,7 @@
                         android:inputType="textEmailAddress"
                         android:orientation="horizontal"
                         android:fontFamily="sans-serif"
+                        android:digits=" 1234567890abcdefghijklmnopqrstuvxyz .  _"
                         />
 
 
@@ -76,18 +73,13 @@
                     app:hintAnimationEnabled="true"
                     app:passwordToggleEnabled="true">
 
-
                     <EditText
                         android:id="@+id/edit_text_senha"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:maxLength="30"
-                        android:fontFamily="sans-serif"
-
-
-                        />
-
+                        android:fontFamily="sans-serif"/>
 
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
@@ -104,27 +96,27 @@
                     android:orientation="vertical">
 
 
-                <CheckedTextView
-                    android:id="@+id/recaptcha"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:drawableLeft="@drawable/ic_nocaptcha"
-                    android:text="Você é um humano?"
-                    android:clickable="true"
-                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                    />
+                    <CheckedTextView
+                        android:id="@+id/recaptcha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:drawableLeft="@drawable/ic_nocaptcha"
+                        android:text="Você é um humano?"
+                        android:clickable="true"
+                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                        />
 
-                <Switch
-                    android:id="@+id/sw_salvar_usuario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:checked="true"
-                    android:text="@string/salvar_usuario"
-                    android:textSize="12dp" />
+                    <Switch
+                        android:id="@+id/sw_salvar_usuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:text="@string/salvar_usuario"
+                        android:textSize="12dp" />
                 </RelativeLayout>
 
                 <Button
@@ -137,9 +129,7 @@
                     android:textColor="@color/colorAccent" />
 
 
-
-
             </LinearLayout>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+    </LinearLayout>
+

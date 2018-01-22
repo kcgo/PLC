@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sample.tqi.com.br.planodecarreira">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".PlanoCarreiraApplication"
         android:allowBackup="true"
@@ -10,20 +12,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".f_login.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".f_login.LoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="160cade2f8d88b6ecd3a18088b1a621f65acc4da"
-            />
-        <activity android:name=".f_perfil_acesso.PerfilAcessoActivity"></activity>
-    </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-</manifest>
+            android:value="160cade2f8d88b6ecd3a18088b1a621f65acc4da" />
+		<activity android:name=".f_Tutor.HomeTutorActivity">
+		</activity>
+        <activity android:name=".f_home_talento.HomeTalentoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".f_perfil_acesso.PerfilAcessoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".f_tarefa.f_detalhe_tarefa.DetalheTarefaActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".f_tarefa.f_lista_tarefa.ListaTarefaActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".f_modulo.ModuloActivity"
+            android:screenOrientation="portrait"/>
+    </application></manifest>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_geral"
+        title="@string/tab_geral"
+        activeColor="#FF9800"
+        inActiveColor="#FFFFFF"
+        barColorWhenSelected="#092140"
+        badgeHidesWhenActive="true"/>
+    <tab
+        id="@+id/tab_status"
+        title="@string/tab_status"
+        activeColor="#FF9800"
+        inActiveColor="#FFFFFF"
+        barColorWhenSelected="#092140"
+        badgeHidesWhenActive="true"/>
+    <tab
+        id="@+id/tab_comentario"
+        title="@string/tab_comentario"
+        activeColor="#FF9800"
+        inActiveColor="#FFFFFF"
+        barColorWhenSelected="#092140"
+        badgeHidesWhenActive="true"/>
+    <tab
+        id="@+id/tab_log"
+        title="@string/tab_log"
+        activeColor="#FF9800"
+        inActiveColor="#FFFFFF"
+        barColorWhenSelected="#092140"
+        badgeHidesWhenActive="true"/>
+</tabs>

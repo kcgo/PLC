@@ -7,4 +7,8 @@
     <color name="colorPrimaryWhite">#FFF</color>
     <color name="transparent">#00000000</color>
     <color name="blackTransparent">#44000000</color>
+
+    <color name="white">#fff</color>
+    <color name="blue">#092140</color>
+    <color name="yellow">#FF9800</color>
 </resources>

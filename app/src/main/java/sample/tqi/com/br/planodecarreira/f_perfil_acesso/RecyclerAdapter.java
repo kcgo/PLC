@@ -5,6 +5,11 @@ package sample.tqi.com.br.planodecarreira.f_perfil_acesso;
  */
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +20,9 @@ import android.widget.TextView;
 import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
+import sample.tqi.com.br.planodecarreira.f_Tutor.HomeTutorActivity;
+import sample.tqi.com.br.planodecarreira.f_home_talento.HomeTalentoActivity;
+import sample.tqi.com.br.planodecarreira.f_login.LoginActivity;
 import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 
 public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
@@ -22,7 +30,7 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     List<PerfilAcesso> perfilAcessos;
 
 
-    public RecyclerAdapter(Context context, List<PerfilAcesso>perfilAcessos){
+    public RecyclerAdapter( Context context, List <PerfilAcesso> perfilAcessos){
         this.context = context;
         this.perfilAcessos = perfilAcessos;
 
@@ -37,8 +45,24 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewH
 
     @Override
     public void onBindViewHolder( ViewHolder holder, int position ) {
-//        holder.ib_perfil.setBackground( perfilAcessos.get( position ).get );
+//       holder.ib_perfil.setBackground( perfilAcessos.get( position ).get );
         holder.tv_perfil.setText( perfilAcessos.get( position ).getRoleName() );
+
+        holder.cardView.setOnClickListener(view -> {
+            switch (position) {
+                case 0:
+                    Intent intentInstitutional = new Intent(context, HomeTalentoActivity.class);
+                    context.startActivity(intentInstitutional);
+                    break;
+                case 1:
+                    Intent intentNews = new Intent(context, HomeTutorActivity.class);
+                    context.startActivity(intentNews);
+                    break;
+
+                default:
+                    break;
+            }
+        });
 
     }
 
@@ -46,14 +70,16 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     public int getItemCount() {
         return perfilAcessos.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageButton ib_perfil;
         TextView tv_perfil;
+        CardView cardView;
 
         public ViewHolder( View itemView ) {
             super( itemView );
             ib_perfil = (ImageButton) itemView.findViewById(R.id.ib_perfil);
             tv_perfil = (TextView) itemView.findViewById( R.id.tv_perfil );
+            cardView = (CardView) itemView.findViewById( R.id.cv_perfil );
         }
     }
 }

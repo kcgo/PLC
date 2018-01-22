@@ -12,10 +12,10 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ServiceGenerator<T> {
+public class ServiceGenerator {
 
     public static final String ENDPOINT = "http://10.10.0.46:8080/";
-    public static <T>T create(Class<T> apiClass, boolean withToken, Context context) {
+    public static <T>T create( Class <T> apiClass, boolean withToken, Context context) {
 //        String BASE_URL = context.getString(R.string.ENDPOINT);
         String BASE_URL = ENDPOINT;
 
