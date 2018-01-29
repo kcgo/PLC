@@ -1,41 +1,49 @@
 package sample.tqi.com.br.planodecarreira.f_Tutor;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.model.domain.ListaTalentos;
+import sample.tqi.com.br.planodecarreira.model.domain.Talento;
+import sample.tqi.com.br.planodecarreira.ui.WaitDialog;
 
-public class HomeTutorActivity extends Activity implements HomeTutorView {
+import static sample.tqi.com.br.planodecarreira.R.id.tb_activity_talentos;
+
+public class HomeTutorActivity extends AppCompatActivity implements Serializable, HomeTutorView {
 
     private HomeTutorPresenter presenter;
     private Spinner spn1;
     private List <String> estado = new ArrayList <String>();
     private String status;
+    private Toolbar toolbar;
+    private WaitDialog waitDialog;
+
+
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_home_tutor );
+        initComponents();
+
         presenter = new HomeTutorPresenter();
         presenter.attachView( this );
-        presenter.getHomeTutor( HomeTutorActivity.this, estado );
-        estado.add( " Em Avaliação " );
-        estado.add( " Concluido " );
-        estado.add( " Todos " );
+        presenter.getHomeTutor( HomeTutorActivity.this, "todos" );
+        estado.add( "avaliacao" );
+        estado.add( "concluidos" );
+        estado.add( "todos" );
 
-        Spinner spn1 = new Spinner(this);
-
+        Spinner spn1 = new Spinner( this );
         ArrayAdapter <String> arrayAdapter = new ArrayAdapter <String>( this, android.R.layout.simple_spinner_dropdown_item, estado );
         ArrayAdapter <String> spinnerArrayAdapter = arrayAdapter;
         spn1 = findViewById( R.id.spinner );
@@ -48,16 +56,31 @@ public class HomeTutorActivity extends Activity implements HomeTutorView {
                 //pega nome pela posição
 
                 status = parent.getItemAtPosition( posicao ).toString();
-                presenter.getHomeTutor(getApplicationContext(), estado );
-        }
+                presenter.getHomeTutor( getApplicationContext(), status );
+            }
 
             @Override
             public void onNothingSelected( AdapterView <?> parent ) {
 
             }
-        } );
 
+        } );
     }
+    private void initComponents() {
+
+        toolbar = findViewById( tb_activity_talentos );
+        toolbar.setTitle( "Modulo" );
+        setSupportActionBar( toolbar );
+        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+
+        toolbar.setNavigationOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                finish();
+            }
+        } );
+    }
+
 
     @Override
     public void showError( String string ) {
@@ -69,7 +92,7 @@ public class HomeTutorActivity extends Activity implements HomeTutorView {
     }
 
     @Override
-    public void buildAdapter( List <ListaTalentos> lista ) {
+    public void buildAdapter( List <Talento> lista ) {
         RecyclerView recyclerView = (RecyclerView) findViewById( R.id.rv_home_tutor );
         recyclerView.setAdapter( new RecyclerAdapterTutor( this, (lista) ) );
         RecyclerView.LayoutManager layout = new LinearLayoutManager( this, LinearLayoutManager.VERTICAL, false );

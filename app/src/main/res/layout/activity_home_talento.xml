@@ -55,7 +55,7 @@
                         android:id="@+id/tv_modulo_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Módulo 1"
+                        android:text="-"
                         android:textStyle="bold"
                         android:layout_toRightOf="@+id/tv_modulo_title"/>
 
@@ -70,7 +70,7 @@
                         android:id="@+id/tv_data_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="11/10/2018"
+                        android:text="-"
                         android:textStyle="bold"
                         android:layout_below="@id/tv_modulo_title"
                         android:layout_toRightOf="@+id/tv_data_title"/>

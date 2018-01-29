@@ -11,7 +11,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import sample.tqi.com.br.planodecarreira.Presenter;
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.model.service.HomeApi;
 import sample.tqi.com.br.planodecarreira.model.service.ModuloApi;
 import sample.tqi.com.br.planodecarreira.model.service.ServiceGenerator;
 import sample.tqi.com.br.planodecarreira.util.DataStorage;
@@ -20,13 +19,13 @@ import sample.tqi.com.br.planodecarreira.util.DataStorage;
  * Created by katia.goncalves on 22/01/2018.
  */
 
-public class ModuloActivityPresenter implements Presenter<ModuloActivityView> {
+public class ModuloActivityPresenter implements Presenter<ModuloView> {
 
-    private ModuloActivityView view;
+    private ModuloView view;
     private List <Subscription> subscriptionList = new ArrayList <>();
 
     @Override
-    public void attachView( ModuloActivityView view ) {
+    public void attachView( ModuloView view ) {
         this.view = view;
 
     }
@@ -40,34 +39,36 @@ public class ModuloActivityPresenter implements Presenter<ModuloActivityView> {
 
     }
 
-    public void getModuloVigente( final Context context ) {
+//    @Override
+//    public void getModulo( final Context context ) {
+//
+//        final ModuloApi api = ServiceGenerator.create( ModuloApi.class, false, context );
+//
+//        Subscription subscription = api.getModulo( "Bearer " + DataStorage.getAccessToken() )
+//                .subscribeOn( Schedulers.io() )
+//                .observeOn( AndroidSchedulers.mainThread() )
+//                .subscribe( modulo -> {
+//                            view.showSuccess( modulo );
+//                        },
+//                        error -> {
+//                            if (error instanceof HttpException) {
+//                                view.showError( error.getMessage().toString() );
+//                            } else {
+//                                view.showError( context.getString( R.string.unknown_error ) );
+//                            }
+//                        } );
+//        subscriptionList.add( subscription );
+//    }
 
-        final ModuloApi api = ServiceGenerator.create( ModuloApi.class, false, context );
+    public void getFeedback(final Context context, int idTalento, int idModulo) {
 
-        Subscription subscription = api.getModulo( "Bearer " + DataStorage.getAccessToken() )
-                .subscribeOn( Schedulers.io() )
-                .observeOn( AndroidSchedulers.mainThread() )
-                .subscribe( modulo -> {
-                            view.showSuccess( modulo );
-                        },
-                        error -> {
-                            if (error instanceof HttpException) {
-                                view.showError( error.getMessage().toString() );
-                            } else {
-                                view.showError( context.getString( R.string.unknown_error ) );
-                            }
-                        } );
-        subscriptionList.add( subscription );
-    }
-    public void getFeedback(final Context context) {
+        final ModuloApi api = ServiceGenerator.create(ModuloApi.class, false, context);
 
-        final HomeApi api = ServiceGenerator.create(HomeApi.class, false, context);
-
-        Subscription subscription = api.getHistorico("Bearer "+ DataStorage.getAccessToken())
+        Subscription subscription = api.getFeedback("Bearer "+ DataStorage.getAccessToken(), idTalento, idModulo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modulos -> {
-                            view.buildList(modulos);
+                            view.buildFeedBackList(modulos);
                         },
                         error -> {
                             if (error instanceof HttpException){

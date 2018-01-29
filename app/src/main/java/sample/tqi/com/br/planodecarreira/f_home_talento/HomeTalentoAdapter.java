@@ -2,6 +2,7 @@ package sample.tqi.com.br.planodecarreira.f_home_talento;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.f_modulo.ModuloActivity;
-import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaAdapter;
 import sample.tqi.com.br.planodecarreira.model.domain.Modulo;
 
 import static sample.tqi.com.br.planodecarreira.util.UIUtil.getDataConvert;
@@ -25,12 +25,15 @@ import static sample.tqi.com.br.planodecarreira.util.UIUtil.getDataConvert;
 public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater mLayoutInflater;
     private Context context;
+    private Bundle bundle;
     private List<Modulo> modulos;
+    private Long idTalento;
 
-    public HomeTalentoAdapter(Context c, List<Modulo> modulos) {
+    public HomeTalentoAdapter(Context c, List<Modulo> modulos, Long idtalento) {
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         context = c;
         this.modulos = modulos;
+        this.idTalento =idtalento;
     }
 
     @Override
@@ -44,10 +47,11 @@ public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Modulo modulo = modulos.get(position);
+        modulo.setId_talento(idTalento);
         ViewHolderItem vhItem = (ViewHolderItem) holder;
 
-        vhItem.txtModulo.setText(modulo.getNome());
-        vhItem.txtDataFinal.setText(getDataConvert(modulo.getData_final()));
+        vhItem.txtModulo.setText(modulo.getNome_modulo());
+        vhItem.txtDataFinal.setText((modulo.getData_fim() == null? "" : getDataConvert(modulo.getData_fim())));
         vhItem.txtNivel.setText(modulo.getNivel());
         vhItem.txtArea.setText(modulo.getArea());
 
@@ -55,7 +59,10 @@ public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             @Override
             public void onClick(View view) {
+                bundle = new Bundle();
+                bundle.putSerializable("modulo", modulo);
                 Intent intent = new Intent(context, ModuloActivity.class);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
             }
         });
@@ -75,11 +82,11 @@ public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         public ViewHolderItem(View itemView) {
             super(itemView);
-            btnDesc = (Button) itemView.findViewById(R.id.btn_desc);
-            txtModulo = (TextView) itemView.findViewById(R.id.txt_modulo_career_history);
-            txtDataFinal = (TextView) itemView.findViewById(R.id.txt_data_final_career_history);
-            txtNivel = (TextView) itemView.findViewById(R.id.txt_nivel_career_history);
-            txtArea = (TextView) itemView.findViewById(R.id.txt_area_career_history);
+                btnDesc = (Button) itemView.findViewById(R.id.btn_desc);
+                txtModulo = (TextView) itemView.findViewById(R.id.txt_modulo_career_history);
+                txtDataFinal = (TextView) itemView.findViewById(R.id.txt_data_final_career_history);
+                txtNivel = (TextView) itemView.findViewById(R.id.txt_nivel_career_history);
+                txtArea = (TextView) itemView.findViewById(R.id.txt_area_career_history);
         }
     }
 }

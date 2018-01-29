@@ -11,8 +11,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import sample.tqi.com.br.planodecarreira.Presenter;
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.f_home_talento.HomeTalentoView;
-import sample.tqi.com.br.planodecarreira.model.service.HomeApi;
 import sample.tqi.com.br.planodecarreira.model.service.ServiceGenerator;
 import sample.tqi.com.br.planodecarreira.model.service.TarefaApi;
 import sample.tqi.com.br.planodecarreira.util.DataStorage;
@@ -39,11 +37,11 @@ public class ListaTarefaPresenter implements Presenter<ListaTarefaView> {
         }
     }
 
-    public void getListaTarefa(final Context context) {
+    public void getListaTarefa(final Context context, int idModulo) {
 
         final TarefaApi api = ServiceGenerator.create(TarefaApi.class, false, context);
 
-        Subscription subscription = api.getListaTarefa("Bearer "+ DataStorage.getAccessToken())
+        Subscription subscription = api.getListaTarefa("Bearer "+ DataStorage.getAccessToken(), idModulo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(tarefas -> {
@@ -58,4 +56,8 @@ public class ListaTarefaPresenter implements Presenter<ListaTarefaView> {
                         });
         subscriptionList.add(subscription);
     }
-}
+
+
+    }
+
+

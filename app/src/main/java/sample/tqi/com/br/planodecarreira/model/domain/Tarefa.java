@@ -8,49 +8,76 @@ import java.io.Serializable;
 
 public class Tarefa implements Serializable {
 
-    private Long id;
-    private String nome;
-    private Long peso;
-    private String status;
-    private String data_atribuicao;
+    private Long id_tarefa;
+    private Long id_talento;
+    private Long id_modulo;
+    private String nome_tarefa;
+    private String descricao_tarefa;
+    private String estado_tarefa;
+    private String peso_tarefa;
+    private String data_alteracao_tarefa;
 
-    public Long getId() {
-        return id;
+    public Long getId_tarefa() {
+        return id_tarefa;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_tarefa(Long id_tarefa) {
+        this.id_tarefa = id_tarefa;
     }
 
-    public String getNome() {
-        return nome;
+    public Long getId_talento() {
+        return id_talento;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setId_talento(Long id_talento) {
+        this.id_talento = id_talento;
     }
 
-    public Long getPeso() {
-        return peso;
+    public Long getId_modulo() {
+        return id_modulo;
     }
 
-    public void setPeso(Long peso) {
-        this.peso = peso;
+    public void setId_modulo(Long id_modulo) {
+        this.id_modulo = id_modulo;
     }
 
-    public String getStatus() {
-        return status;
+    public String getNome_tarefa() {
+        return nome_tarefa;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setNome_tarefa(String nome_tarefa) {
+        this.nome_tarefa = nome_tarefa;
     }
 
-    public String getData_atribuicao() {
-        return data_atribuicao;
+    public String getDescricao_tarefa() {
+        return descricao_tarefa;
     }
 
-    public void setData_atribuicao(String data_atribuicao) {
-        this.data_atribuicao = data_atribuicao;
+    public void setDescricao_tarefa(String descricao_tarefa) {
+        this.descricao_tarefa = descricao_tarefa;
+    }
+
+    public String getEstado_tarefa() {
+        return estado_tarefa;
+    }
+
+    public void setEstado_tarefa(String estado_tarefa) {
+        this.estado_tarefa = estado_tarefa;
+    }
+
+    public String getPeso_tarefa() {
+        return peso_tarefa;
+    }
+
+    public void setPeso_tarefa(String peso_tarefa) {
+        this.peso_tarefa = peso_tarefa;
+    }
+
+    public String getData_alteracao_tarefa() {
+        return data_alteracao_tarefa;
+    }
+
+    public void setData_alteracao_tarefa(String data_alteracao_tarefa) {
+        this.data_alteracao_tarefa = data_alteracao_tarefa;
     }
 }

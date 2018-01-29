@@ -36,6 +36,7 @@ public class LoginPresenter implements Presenter<LoginView> {
 
     }
 
+
     public void login(final String username, String password, final Context context) {
 
         final UserApi api = ServiceGenerator.create(UserApi.class, false, context);
@@ -85,4 +86,5 @@ public class LoginPresenter implements Presenter<LoginView> {
         String base64EncodedCredentials = "Basic Y2xpZW50OnNlY3JldA==";
         return base64EncodedCredentials;
     }
+
 }

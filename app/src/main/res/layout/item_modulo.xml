@@ -12,7 +12,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_nome_avaliador"
+            android:id="@+id/tv_remetente_item_modulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cristiano Oliveira"
@@ -24,13 +24,14 @@
             android:layout_height="wrap_content"
             android:text="Gerente"
             android:textStyle="bold"
+            android:visibility="gone"
             android:layout_gravity="right"
             android:gravity="right"/>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_Lista_feedback"
+        android:id="@+id/tv_feedback_item_modulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="4"

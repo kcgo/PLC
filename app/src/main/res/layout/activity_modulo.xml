@@ -18,14 +18,14 @@
     </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:id="@+id/tx_descricao_tarefa"
+        android:id="@+id/tv_descricao_modulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Desenvolvimento de tela"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/tv_nome_tutor"
+        android:id="@+id/tv_nome_tutor_modulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Peterson Farias"
@@ -38,7 +38,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_data_i"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Data inicial: "/>
@@ -46,9 +45,9 @@
         <TextView
             android:id="@+id/tv_data_inicial"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="11/02/2018"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -57,7 +56,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_data_f"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Data final:"/>
@@ -76,7 +74,6 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_status"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Status: "/>

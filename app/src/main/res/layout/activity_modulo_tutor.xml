@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="10dp"
+tools:context="sample.tqi.com.br.planodecarreira.f_modulo_tutor.ModuloTutorActivity">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/tb_activity_modulo_tutor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="2dp">
+
+</android.support.v7.widget.Toolbar>
+
+<TextView
+    android:id="@+id/tv_descricao_modulo_tutor"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Desenvolvimento de tela"
+    android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data final: "/>
+
+        <TextView
+            android:id="@+id/txt_data_final_modulo_tutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15/12/2019"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nível: "/>
+
+        <TextView
+            android:id="@+id/txt_nivel_modulo_tutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pleno"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Área: "/>
+
+        <TextView
+            android:id="@+id/txt_area_modulo_tutor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Desenvolvimento android"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_tarefas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tarefas"
+        android:textStyle="bold"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_modulo_tutor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_lista_tarefa"
+        android:nestedScrollingEnabled="false"/>
+</LinearLayout>

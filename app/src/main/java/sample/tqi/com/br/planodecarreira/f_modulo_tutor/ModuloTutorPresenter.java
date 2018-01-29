@@ -1,4 +1,4 @@
-package sample.tqi.com.br.planodecarreira.f_perfil_acesso;
+package sample.tqi.com.br.planodecarreira.f_modulo_tutor;
 
 import android.content.Context;
 
@@ -11,22 +11,21 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import sample.tqi.com.br.planodecarreira.Presenter;
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.f_modulo.ModuloActivity;
-import sample.tqi.com.br.planodecarreira.model.service.PerfilAcessoApi;
 import sample.tqi.com.br.planodecarreira.model.service.ServiceGenerator;
+import sample.tqi.com.br.planodecarreira.model.service.TarefaApi;
 import sample.tqi.com.br.planodecarreira.util.DataStorage;
 
 /**
- * Created by katia.goncalves on 10/01/2018.
+ * Created by alexandre.azevedo on 25/01/2018.
  */
 
-public class PerfilAcessoPresenter implements Presenter<PerfilAcessoView> {
+public class ModuloTutorPresenter implements Presenter<ModuloTutorView> {
 
-    private PerfilAcessoView view;
-    private List <Subscription> subscriptionList = new ArrayList <>();
+    private ModuloTutorView view;
+    private List<Subscription> subscriptionList = new ArrayList<>();
 
     @Override
-    public void attachView( PerfilAcessoView view ) {
+    public void attachView( ModuloTutorView view ) {
         this.view = view;
     }
 
@@ -38,18 +37,18 @@ public class PerfilAcessoPresenter implements Presenter<PerfilAcessoView> {
         }
     }
 
-    public void getPerfilAcesso( final Context context ) {
-        PerfilAcessoApi api = ServiceGenerator.create(PerfilAcessoApi.class, false, context);
+    public void getTarefa(final Context context, int idTalento, int idModulo) {
 
-        Subscription subscription = api.getPerfilAcesso("Bearer "+ DataStorage.getAccessToken())
+        final TarefaApi api = ServiceGenerator.create(TarefaApi.class, false, context);
+        Subscription subscription = api.getTutorListaTarefa("Bearer "+ DataStorage.getAccessToken(), idTalento, idModulo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(listaPerfil -> {
-                            view.buildAdapter(listaPerfil);
+                .subscribe(tarefas -> {
+                            view.buildTarefaList(tarefas);
                         },
                         error -> {
-                            if (error instanceof HttpException) {
-                                view.showError(context.getString(R.string.credentials_invalid));
+                            if (error instanceof HttpException){
+                                view.showError(error.getMessage().toString());
                             } else {
                                 view.showError(context.getString(R.string.unknown_error));
                             }

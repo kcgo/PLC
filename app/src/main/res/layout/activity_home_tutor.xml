@@ -7,6 +7,14 @@
     android:paddingLeft="12dp"
     android:paddingRight="12dp">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_activity_talentos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp">
+
+    </android.support.v7.widget.Toolbar>
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"

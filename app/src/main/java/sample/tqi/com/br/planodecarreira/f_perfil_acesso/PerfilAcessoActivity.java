@@ -2,21 +2,18 @@ package sample.tqi.com.br.planodecarreira.f_perfil_acesso;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.f_login.LoginView;
+import sample.tqi.com.br.planodecarreira.f_Tutor.HomeTutorActivity;
+import sample.tqi.com.br.planodecarreira.f_home_talento.HomeTalentoActivity;
 import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
-import sample.tqi.com.br.planodecarreira.ui.WaitDialog;
 
 public class PerfilAcessoActivity extends Activity implements PerfilAcessoView {
 
@@ -29,11 +26,8 @@ public class PerfilAcessoActivity extends Activity implements PerfilAcessoView {
 
         presenter = new PerfilAcessoPresenter();
         presenter.attachView( this );
-
         presenter.getPerfilAcesso( PerfilAcessoActivity.this );
-
     }
-
 
     @Override
     public void showError( String string ) {
@@ -44,11 +38,21 @@ public class PerfilAcessoActivity extends Activity implements PerfilAcessoView {
         toast.show();
     }
 
-
     @Override
     public void buildAdapter( List <PerfilAcesso> lista ) {
+        if (lista.size() == 1) {
+            if (lista.get( 0 ).getDescription().equals( "Talento" )) {
+                Intent intent = new Intent( getApplicationContext(), HomeTalentoActivity.class );
+                startActivity( intent );
+                finish();
+            } else {
+                Intent intent = new Intent( getApplicationContext(), HomeTutorActivity.class );
+                startActivity( intent );
+                finish();
+            }
+        }
         RecyclerView recyclerView = (RecyclerView) findViewById( R.id.rv_perfil );
-        recyclerView.setAdapter( new RecyclerAdapter( this, (lista ) ));
+        recyclerView.setAdapter( new RecyclerAdapter( this, (lista) ) );
         RecyclerView.LayoutManager layout = new LinearLayoutManager( this, LinearLayoutManager.VERTICAL, false );
         recyclerView.setLayoutManager( layout );
     }

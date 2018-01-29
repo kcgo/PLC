@@ -16,9 +16,10 @@
             android:text="Tarefa:" />
 
         <EditText
+            android:id="@+id/edt_nome_tarefa_visao_geral"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lorem_ipsum"
+            android:text=""
             android:maxLines="1"/>
 
         <TextView
@@ -27,9 +28,10 @@
             android:text="Descrição da tarefa:" />
 
         <EditText
+            android:id="@+id/edt_descricao_tarefa_visao_geral"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:text="@string/lorem_ipsum"
+            android:text=""
             android:maxLines="10"/>
 
     </LinearLayout>

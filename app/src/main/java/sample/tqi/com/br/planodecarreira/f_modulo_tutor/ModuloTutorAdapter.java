@@ -1,4 +1,4 @@
-package sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa;
+package sample.tqi.com.br.planodecarreira.f_modulo_tutor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,22 +14,22 @@ import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.DetalheTarefaActivity;
-import sample.tqi.com.br.planodecarreira.model.domain.Modulo;
+import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaAdapter;
 import sample.tqi.com.br.planodecarreira.model.domain.Tarefa;
 
 import static sample.tqi.com.br.planodecarreira.util.UIUtil.getDataConvert;
 
 /**
- * Created by alexandre.azevedo on 17/01/2018.
+ * Created by alexandre.azevedo on 25/01/2018.
  */
 
-public class ListaTarefaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ModuloTutorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater mLayoutInflater;
     private Context context;
     private Bundle bundle;
     private List<Tarefa> tarefas;
 
-    public ListaTarefaAdapter(Context c, List<Tarefa> tarefas) {
+    public ModuloTutorAdapter(Context c, List<Tarefa> tarefas) {
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         context = c;
         this.tarefas = tarefas;
@@ -38,7 +38,7 @@ public class ListaTarefaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View vItem = mLayoutInflater.inflate(R.layout.item_lista_tarefa, parent, false);
-        ListaTarefaAdapter.ViewHolderItem mvhvItem = new ListaTarefaAdapter.ViewHolderItem(vItem);
+        ModuloTutorAdapter.ViewHolderItem mvhvItem = new ModuloTutorAdapter.ViewHolderItem(vItem);
 
         return mvhvItem;
     }
@@ -46,7 +46,7 @@ public class ListaTarefaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Tarefa tarefa = tarefas.get(position);
-        ViewHolderItem vhItem = (ViewHolderItem) holder;
+        ModuloTutorAdapter.ViewHolderItem vhItem = (ModuloTutorAdapter.ViewHolderItem) holder;
 
         vhItem.txtTarefa.setText(tarefa.getNome_tarefa());
         vhItem.txtData.setText((tarefa.getData_alteracao_tarefa() == null? "" : getDataConvert(tarefa.getData_alteracao_tarefa())));

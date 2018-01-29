@@ -1,6 +1,7 @@
 package sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -23,12 +24,16 @@ public class ListaTarefaActivity extends AppCompatActivity implements ListaTaref
     private ListaTarefaPresenter presenter;
     private WaitDialog waitDialog;
     private CardView cardView;
+    private int idModulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_tarefa);
+        initComponents();
+    }
 
+    private void initComponents() {
         findViewById();
 
         waitDialog = new WaitDialog(this);
@@ -45,7 +50,7 @@ public class ListaTarefaActivity extends AppCompatActivity implements ListaTaref
             }
         });
 
-        loadData();
+        getBundle();
     }
 
     private void findViewById() {
@@ -54,9 +59,17 @@ public class ListaTarefaActivity extends AppCompatActivity implements ListaTaref
         cardView = (CardView) findViewById(R.id.card_empty);
     }
 
-    public void loadData() {
+    public void getBundle() {
+        Intent intent = getIntent();
+        Bundle params = intent.getExtras();
+
+        idModulo = params.getInt("idModulo", 0);
+        loadData(idModulo);
+    }
+
+    public void loadData(int idModulo) {
         waitDialog.show();
-        presenter.getListaTarefa(this);
+        presenter.getListaTarefa(this, idModulo);
     }
 
     @Override
@@ -93,4 +106,11 @@ public class ListaTarefaActivity extends AppCompatActivity implements ListaTaref
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
+
+    @Override
+    public void dettachView( Context context ) {
+
+    }
+
+
 }

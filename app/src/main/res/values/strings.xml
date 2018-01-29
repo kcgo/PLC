@@ -10,7 +10,6 @@
     <string name="memorizar_senha">Memorizar Senha</string>
     <string name="unknown_error">Erro Desconhecido!</string>
     <string name="empty_user">Informar Usuário e Senha</string>
-    <string name="empty_password">Informe a senha!</string>
     <string name="credentials_invalid">Informar Usuário e Senha</string>
     <string name="confirm_not_a_robot">Confirm not a robot</string>
     <string name="salvar_usuario">Lembrar Usuário</string>

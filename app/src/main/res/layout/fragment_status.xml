@@ -16,11 +16,13 @@
             android:text="Informe uma observação:" />
 
         <EditText
+            android:id="@+id/edt_txt_observacao_status"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:maxLines="10"/>
 
         <Button
+            android:id="@+id/btn_enviar_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

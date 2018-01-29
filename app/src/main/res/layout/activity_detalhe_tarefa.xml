@@ -31,4 +31,14 @@ tools:context="sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.Detal
         app:bb_activeTabColor="@color/yellow"
         app:bb_badgesHideWhenActive="true"/>
 
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBarStatusBlocked"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        app:bb_tabXmlResource="@xml/menu_bottom_navigation_status_blocked"
+        app:bb_activeTabColor="@color/yellow"
+        app:bb_badgesHideWhenActive="true"/>
+
 </RelativeLayout>

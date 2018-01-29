@@ -29,11 +29,9 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     Context context;
     List<PerfilAcesso> perfilAcessos;
 
-
     public RecyclerAdapter( Context context, List <PerfilAcesso> perfilAcessos){
         this.context = context;
         this.perfilAcessos = perfilAcessos;
-
        }
 
     @Override
@@ -46,24 +44,18 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     @Override
     public void onBindViewHolder( ViewHolder holder, int position ) {
 //       holder.ib_perfil.setBackground( perfilAcessos.get( position ).get );
-        holder.tv_perfil.setText( perfilAcessos.get( position ).getRoleName() );
+        holder.tv_perfil.setText( perfilAcessos.get( position ).getDescription() );
 
         holder.cardView.setOnClickListener(view -> {
-            switch (position) {
-                case 0:
-                    Intent intentInstitutional = new Intent(context, HomeTalentoActivity.class);
-                    context.startActivity(intentInstitutional);
-                    break;
-                case 1:
-                    Intent intentNews = new Intent(context, HomeTutorActivity.class);
-                    context.startActivity(intentNews);
-                    break;
+            if (perfilAcessos.get( position ).getDescription().equals( "Talento" )) {
 
-                default:
-                    break;
+                Intent intentInstitutional = new Intent(context, HomeTalentoActivity.class);
+                context.startActivity(intentInstitutional);
+            } else {
+                Intent intentNews = new Intent(context, HomeTutorActivity.class);
+                context.startActivity(intentNews);
             }
         });
-
     }
 
     @Override

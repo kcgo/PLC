@@ -14,9 +14,9 @@ import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 
 public interface HomeApi {
 
-    @GET("http://demo5537570.mockable.io/planodecarreira/hometalento/modulovigente")
+    @GET("avaliacao/modulos?filtro=vigente")
     Observable<Modulo> getModuloVigente(@Header("Authorization") String authorization);
 
-    @GET("https://demo5537570.mockable.io/planodecarreira/hometalento/historico")
+    @GET("avaliacao/modulos?filtro=concluidos")
     Observable<List<Modulo>> getHistorico(@Header("Authorization") String authorization);
 }

@@ -61,9 +61,7 @@ public class LoginActivity extends Activity implements LoginView {
     private Switch sw_salvar_usuario;
     private CheckedTextView btn_Recaptcha;
     private View v;
-    private Button bt_acessar;
-
-
+    private Button btn_acessar;
     private String user_name;
     private InputMethodService.InputMethodSessionImpl inputMethodManager;
 
@@ -72,18 +70,14 @@ public class LoginActivity extends Activity implements LoginView {
         super.onCreate( savedInstanceState );
         Fabric.with( this, new Crashlytics() );
         setContentView( R.layout.activity_login );
-
         loginPresenter = new LoginPresenter();
         loginPresenter.attachView( this );
         waitDialog = new WaitDialog(this);
         userResponseToken = "";
-
         edit_text_usuário = findViewById( R.id.edit_text_usuário );
         edit_text_senha = findViewById( R.id.edit_text_senha );
         sw_salvar_usuario = findViewById( R.id.sw_salvar_usuario );
         btn_Recaptcha = findViewById( R.id.recaptcha );
-
-
 
         Button button = findViewById( R.id.bt_acessar );
         button.setOnClickListener( view -> {
@@ -101,7 +95,7 @@ public class LoginActivity extends Activity implements LoginView {
                         waitDialog.dismiss();
                         Context context = getApplicationContext();
                         CharSequence text = "Valide o captcha";
-                        int duration = Toast.LENGTH_SHORT;
+                        int duration = Toast.LENGTH_LONG;
 
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
@@ -111,15 +105,13 @@ public class LoginActivity extends Activity implements LoginView {
                 }
             } else {
                 Context context = getApplicationContext();
-                CharSequence text = "Informe todos os campos";
-                int duration = Toast.LENGTH_SHORT;
+                CharSequence text = "Informar Usuário e Senha";
+                int duration = Toast.LENGTH_LONG;
 
                  Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
             }
         } );
-
-
         btn_Recaptcha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
@@ -188,7 +180,7 @@ public class LoginActivity extends Activity implements LoginView {
         String url = "https://www.google.com/recaptcha/api/siteverify";
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                response -> {
+                ( String response ) -> {
                     try {
                         JSONObject obj = new JSONObject( response );
                         if (obj.getString( "success" ).equals( "true" )) {
@@ -227,12 +219,18 @@ public class LoginActivity extends Activity implements LoginView {
     public void showError( String message ) {
         waitDialog.dismiss();
         btn_Recaptcha.setVisibility(View.VISIBLE);
+        btn_Recaptcha.setChecked( false );
+        userResponseToken= "";
+        btn_Recaptcha.setChecked(false);
+        userResponseToken = "";
         edit_text_senha.setText("");
+        edit_text_usuário.setText(" " );
         Context context = getApplicationContext();
         CharSequence text = message;
-        int duration = Toast.LENGTH_SHORT;
+        int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
+
 }

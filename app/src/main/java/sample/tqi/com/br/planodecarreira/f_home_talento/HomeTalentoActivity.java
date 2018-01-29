@@ -22,6 +22,7 @@ import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.f_login.LoginPresenter;
 import sample.tqi.com.br.planodecarreira.f_modulo.ModuloActivity;
 import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaActivity;
+import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaPresenter;
 import sample.tqi.com.br.planodecarreira.model.domain.Modulo;
 import sample.tqi.com.br.planodecarreira.ui.WaitDialog;
 
@@ -39,14 +40,21 @@ public class HomeTalentoActivity extends AppCompatActivity implements HomeTalent
     private CardView cardView;
     private WaitDialog waitDialog;
     private HomeTalentoPresenter presenter;
+    private Bundle bundle;
+    private Modulo modulo;
+    private Long idTalento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_talento);
+        initComponents();
+    }
 
+    private void initComponents() {
         findViewById();
 
+        modulo = new Modulo();
         waitDialog = new WaitDialog(this);
         presenter = new HomeTalentoPresenter();
         presenter.attachView(this);
@@ -61,18 +69,17 @@ public class HomeTalentoActivity extends AppCompatActivity implements HomeTalent
             }
         });
 
-
         scrollView.smoothScrollTo(0,0);
-
         btnTask.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( getApplicationContext(),ListaTarefaActivity.class);
+                bundle = new Bundle();
+                bundle.putInt("idModulo", modulo.getId_modulo().intValue());
+                Intent intent = new Intent(getApplicationContext(), ListaTarefaActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
-
         loadData();
     }
 
@@ -90,15 +97,18 @@ public class HomeTalentoActivity extends AppCompatActivity implements HomeTalent
     public void loadData() {
         waitDialog.show();
         presenter.getModuloVigente(this);
-        presenter.getHistorico(this);
     }
 
     @Override
     public void showSuccess(Modulo modulo) {
-        waitDialog.dismiss();
-        txtModulo.setText(modulo.getNome());
-        txtDataFinal.setText(getDataConvert(modulo.getData_final()));
-        txtCount.setText(modulo.getTarefas_concluidas().toString() + " / " + modulo.getTarefas_total().toString());
+//        waitDialog.dismiss();
+        this.modulo = modulo;
+        this.idTalento = modulo.getId_talento();
+        txtModulo.setText(modulo.getNome_modulo());
+        txtDataFinal.setText((modulo.getData_fim() == null? "" : getDataConvert(modulo.getData_fim())));
+        txtCount.setText(modulo.getTarefas_concluidas().toString() + " / " + modulo.getTarefas_totais().toString());
+
+        presenter.getHistorico(this);
     }
 
     @Override
@@ -110,7 +120,7 @@ public class HomeTalentoActivity extends AppCompatActivity implements HomeTalent
             LinearLayoutManager llm = new LinearLayoutManager(this);
             llm.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(llm);
-            HomeTalentoAdapter adapter = new HomeTalentoAdapter(this, modulos);
+            HomeTalentoAdapter adapter = new HomeTalentoAdapter(this, modulos, idTalento);
             recyclerView.setAdapter(adapter);
         } else {
             cardView.setVisibility(View.VISIBLE);
