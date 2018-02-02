@@ -24,6 +24,7 @@ public class HomeTutorPresenter implements Presenter<HomeTutorView> {
     private HomeTutorView view;
     private List <Subscription> subscriptionList = new ArrayList <>();
 
+    @Override
     public void attachView( HomeTutorView view ) {
         this.view = view;
     }
@@ -56,6 +57,7 @@ public class HomeTutorPresenter implements Presenter<HomeTutorView> {
         subscriptionList.add( subscription );
     }
 
-
+    public void saveTypeAccess(String tipoAcesso){
+        DataStorage.setTypeAccess(tipoAcesso);
+    }
 }
-

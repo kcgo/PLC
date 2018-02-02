@@ -22,9 +22,12 @@ public class LoginPresenter implements Presenter<LoginView> {
     private LoginView view;
     private List<Subscription> subscriptionList = new ArrayList<>();
 
+
+
     @Override
-    public void attachView(LoginView view) {
+    public void attachView( LoginView view ) {
         this.view = view;
+
     }
 
     @Override

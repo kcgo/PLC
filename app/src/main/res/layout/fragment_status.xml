@@ -5,6 +5,7 @@
     tools:context="sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.f_status.StatusFragment">
 
     <LinearLayout
+        android:id="@+id/ln_texto_observacao"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -26,8 +27,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:visibility="gone"
             android:text="Enviar"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ln_botao_tutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btn_rejeitar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:visibility="gone"
+                android:text="Rejeitar"/>
+            <Button
+                android:id="@+id/btn_aprovar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:visibility="gone"
+                android:text="Aprovar"/>
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

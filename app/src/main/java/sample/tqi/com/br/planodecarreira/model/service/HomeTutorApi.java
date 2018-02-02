@@ -14,7 +14,7 @@ import sample.tqi.com.br.planodecarreira.model.domain.Talento;
 
 public interface HomeTutorApi {
     //@GET("home/tutor")
-    @GET("http://10.10.0.46:8080/avaliacao/talentos")
+    @GET("/avaliacao/talentos")
     Observable<List<Talento>> getHomeTutor(@Header("Authorization") String authorization, @Query( "filtro") String filtro );
 
     //Observable<List<HomeTutor>> getHomeTutor( @Header("Authorization") String authorization );

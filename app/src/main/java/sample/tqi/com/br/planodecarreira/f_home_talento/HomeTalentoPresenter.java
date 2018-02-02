@@ -24,9 +24,10 @@ public class HomeTalentoPresenter implements Presenter<HomeTalentoView> {
     private HomeTalentoView view;
     private List<Subscription> subscriptionList = new ArrayList<>();
 
+
     @Override
-    public void attachView(HomeTalentoView view) {
-        this.view = view;
+    public void attachView( HomeTalentoView view ) {
+        this.view= view;
     }
 
     @Override
@@ -75,5 +76,9 @@ public class HomeTalentoPresenter implements Presenter<HomeTalentoView> {
                             }
                         });
         subscriptionList.add(subscription);
+    }
+
+    public void saveTypeAccess(String tipoAcesso){
+        DataStorage.setTypeAccess(tipoAcesso);
     }
 }

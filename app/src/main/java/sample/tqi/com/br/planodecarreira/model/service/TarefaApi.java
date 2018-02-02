@@ -7,10 +7,14 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import rx.Observable;
+import sample.tqi.com.br.planodecarreira.model.domain.AlterarStatusResponse;
 import sample.tqi.com.br.planodecarreira.model.domain.Comentario;
 import sample.tqi.com.br.planodecarreira.model.domain.Log;
+import sample.tqi.com.br.planodecarreira.model.domain.StatusTalento;
+import sample.tqi.com.br.planodecarreira.model.domain.StatusTutor;
 import sample.tqi.com.br.planodecarreira.model.domain.Tarefa;
 
 /**
@@ -43,7 +47,7 @@ public interface TarefaApi {
                                                 @Path("idModulo") int idModulo,
                                                 @Path("idTarefa") int idTarefa );
 
-    @GET("avaliacao/{idTalento}/{idModulo}/tarefas/{idtarefa}/comentarios")
+    @GET("avaliacao/{idTalento}/{idModulo}/tarefas/{idTarefa}/comentarios")
     Observable <List <Comentario>> getTarefaComentario( @Header("Authorization") String authorization,
                                                         @Path("idTalento") int idTalento,
                                                         @Path("idModulo") int idModulo,
@@ -55,4 +59,18 @@ public interface TarefaApi {
                                                    @Path("idTalento") int idTalento,
                                                    @Path("idModulo") int idModulo,
                                                    @Path("idTarefa") int idTarefa);
+
+    @PUT("avaliacao/{idTalento}/{idModulo}/tarefas/{idTarefa}")
+    Observable<AlterarStatusResponse>putAlterarStatusTutor( @Header("Authorization") String authorization,
+                                              @Body StatusTutor status,
+                                              @Path("idTalento") int idTalento,
+                                              @Path("idModulo") int idModulo,
+                                              @Path("idTarefa") int idTarefa);
+
+    @PUT("avaliacao/{idModulo}/tarefas/{idTarefa}")
+    Observable<AlterarStatusResponse>putAlterarStatusTalento(@Header("Authorization") String authorization,
+                                                             @Body StatusTalento status,
+                                                             @Path("idModulo") int idModulo,
+                                                             @Path("idTarefa") int idTarefa);
+
 }

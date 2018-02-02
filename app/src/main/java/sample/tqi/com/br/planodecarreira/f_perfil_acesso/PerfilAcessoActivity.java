@@ -25,7 +25,7 @@ public class PerfilAcessoActivity extends Activity implements PerfilAcessoView {
         setContentView( R.layout.activity_perfil_acesso );
 
         presenter = new PerfilAcessoPresenter();
-        presenter.attachView( this );
+        presenter.attachView(this);
         presenter.getPerfilAcesso( PerfilAcessoActivity.this );
     }
 

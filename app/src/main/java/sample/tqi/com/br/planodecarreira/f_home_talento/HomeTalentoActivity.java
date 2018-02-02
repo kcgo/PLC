@@ -1,10 +1,8 @@
 package sample.tqi.com.br.planodecarreira.f_home_talento;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,10 +17,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.f_login.LoginPresenter;
-import sample.tqi.com.br.planodecarreira.f_modulo.ModuloActivity;
 import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaActivity;
-import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaPresenter;
 import sample.tqi.com.br.planodecarreira.model.domain.Modulo;
 import sample.tqi.com.br.planodecarreira.ui.WaitDialog;
 
@@ -58,6 +53,7 @@ public class HomeTalentoActivity extends AppCompatActivity implements HomeTalent
         waitDialog = new WaitDialog(this);
         presenter = new HomeTalentoPresenter();
         presenter.attachView(this);
+        presenter.saveTypeAccess("talento");
         toolbar.setTitle(getString(R.string.st_home_talent));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

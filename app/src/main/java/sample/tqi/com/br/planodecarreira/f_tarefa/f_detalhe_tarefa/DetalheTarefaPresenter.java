@@ -25,8 +25,8 @@ public class DetalheTarefaPresenter implements Presenter<DetalheTarefaView> {
     private List<Subscription> subscriptionList = new ArrayList<>();
 
     @Override
-    public void attachView(DetalheTarefaView view) {
-        this.view = view;
+    public void attachView( DetalheTarefaView view ) {
+        this.view=view;
     }
 
     @Override
@@ -98,24 +98,6 @@ public class DetalheTarefaPresenter implements Presenter<DetalheTarefaView> {
         subscriptionList.add(subscription);
     }
 
-    public void getComentarioTarefa(final Context context) {
 
-        final TarefaApi api = ServiceGenerator.create(TarefaApi.class, false, context);
-
-        Subscription subscription = api.getTarefaComentario("Bearer "+ DataStorage.getAccessToken(),2,1,1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(comentarios -> {
-                            view.buildComentarioList(comentarios);
-                        },
-                        error -> {
-                            if (error instanceof HttpException){
-                                view.showError(error.getMessage().toString());
-                            } else {
-                                view.showError(context.getString(R.string.unknown_error));
-                            }
-                        });
-        subscriptionList.add(subscription);
-    }
 
 }

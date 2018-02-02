@@ -18,6 +18,7 @@ import sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.f_log.LogFrag
 import sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.f_status.StatusFragment;
 import sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.f_visao_geral.VisaoGeralFragment;
 import sample.tqi.com.br.planodecarreira.model.domain.Tarefa;
+import sample.tqi.com.br.planodecarreira.util.DataStorage;
 
 public class DetalheTarefaActivity extends AppCompatActivity {
 
@@ -38,10 +39,11 @@ public class DetalheTarefaActivity extends AppCompatActivity {
     private void findViewById() {
         bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         toolbar = (Toolbar) findViewById(R.id.tb_activity_detalhe_tarefa);
-        if (!tarefa.getEstado_tarefa().equals("Fazer")) {
-            bottomBar = (BottomBar) findViewById(R.id.bottomBarStatusBlocked);
+
+        if (DataStorage.getTypeAccess().equals(getString(R.string.talento))) {
+            bottomBar = !tarefa.getEstado_tarefa().equals(getString(R.string.fazer)) ? (BottomBar) findViewById(R.id.bottomBarStatusBlocked) : (BottomBar) findViewById(R.id.bottomBar);
         } else {
-            bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+            bottomBar = !tarefa.getEstado_tarefa().equals(getString(R.string.feita)) ? (BottomBar) findViewById(R.id.bottomBarStatusBlocked) : (BottomBar) findViewById(R.id.bottomBar);
         }
     }
 
@@ -53,8 +55,14 @@ public class DetalheTarefaActivity extends AppCompatActivity {
         bottomBar.setClickable(false);
 
         bottomBar.setTabSelectionInterceptor( ( oldTabId, newTabId ) -> {
-            if (newTabId == R.id.tab_status && (!tarefa.getEstado_tarefa().equals("Fazer"))) {
-                return true;
+            if (DataStorage.getTypeAccess().equals(getString(R.string.talento))) {
+                if (newTabId == R.id.tab_status && (!tarefa.getEstado_tarefa().equals(getString(R.string.fazer)))) {
+                    return true;
+                }
+            } else {
+                if (newTabId == R.id.tab_status && (!tarefa.getEstado_tarefa().equals(getString(R.string.feita)))) {
+                    return true;
+                }
             }
 
             return false;

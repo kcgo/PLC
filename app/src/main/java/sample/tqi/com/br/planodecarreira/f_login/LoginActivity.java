@@ -71,7 +71,7 @@ public class LoginActivity extends Activity implements LoginView {
         Fabric.with( this, new Crashlytics() );
         setContentView( R.layout.activity_login );
         loginPresenter = new LoginPresenter();
-        loginPresenter.attachView( this );
+        loginPresenter.attachView(this);
         waitDialog = new WaitDialog(this);
         userResponseToken = "";
         edit_text_usuário = findViewById( R.id.edit_text_usuário );
@@ -224,7 +224,8 @@ public class LoginActivity extends Activity implements LoginView {
         btn_Recaptcha.setChecked(false);
         userResponseToken = "";
         edit_text_senha.setText("");
-        edit_text_usuário.setText(" " );
+
+        //edit_text_usuário.setText(user_name);
         Context context = getApplicationContext();
         CharSequence text = message;
         int duration = Toast.LENGTH_LONG;

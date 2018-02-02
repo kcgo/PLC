@@ -25,7 +25,7 @@ public class ListaTarefaPresenter implements Presenter<ListaTarefaView> {
     private List<Subscription> subscriptionList = new ArrayList<>();
 
     @Override
-    public void attachView(ListaTarefaView view) {
+    public void attachView( ListaTarefaView view ) {
         this.view = view;
     }
 

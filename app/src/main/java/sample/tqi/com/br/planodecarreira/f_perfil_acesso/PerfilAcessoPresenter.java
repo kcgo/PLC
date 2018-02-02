@@ -11,7 +11,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import sample.tqi.com.br.planodecarreira.Presenter;
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.f_modulo.ModuloActivity;
 import sample.tqi.com.br.planodecarreira.model.service.PerfilAcessoApi;
 import sample.tqi.com.br.planodecarreira.model.service.ServiceGenerator;
 import sample.tqi.com.br.planodecarreira.util.DataStorage;

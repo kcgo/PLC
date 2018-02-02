@@ -11,9 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.model.domain.Talento;
 import sample.tqi.com.br.planodecarreira.ui.WaitDialog;
@@ -37,14 +39,20 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
         initComponents();
 
         presenter = new HomeTutorPresenter();
-        presenter.attachView( this );
+        presenter.attachView(this);
+        presenter.saveTypeAccess("tutor");
         presenter.getHomeTutor( HomeTutorActivity.this, "todos" );
-        estado.add( "avaliacao" );
-        estado.add( "concluidos" );
-        estado.add( "todos" );
+        estado.add( "Avaliação" );
+        estado.add( "Concluídos" );
+        estado.add( "Todos" );
+
+        ArrayList<String> optionsAction = new ArrayList<String>();
+        optionsAction.add( "avaliacao" );
+        optionsAction.add( "concluidos" );
+        optionsAction.add( "todos" );
 
         Spinner spn1 = new Spinner( this );
-        ArrayAdapter <String> arrayAdapter = new ArrayAdapter <String>( this, android.R.layout.simple_spinner_dropdown_item, estado );
+        ArrayAdapter <String> arrayAdapter = new ArrayAdapter <String>( this, android.R.layout.simple_list_item_1, estado );
         ArrayAdapter <String> spinnerArrayAdapter = arrayAdapter;
         spn1 = findViewById( R.id.spinner );
         spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_item );
@@ -55,7 +63,8 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
             public void onItemSelected( AdapterView <?> parent, View v, int posicao, long id ) {
                 //pega nome pela posição
 
-                status = parent.getItemAtPosition( posicao ).toString();
+//                status = parent.getItemAtPosition( posicao ).toString();
+                status = optionsAction.get(posicao).toString();
                 presenter.getHomeTutor( getApplicationContext(), status );
             }
 
@@ -69,13 +78,15 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
     private void initComponents() {
 
         toolbar = findViewById( tb_activity_talentos );
-        toolbar.setTitle( "Modulo" );
+        toolbar.setTitle( "Home" );
+        toolbar.getContentInsetStartWithNavigation();
         setSupportActionBar( toolbar );
         getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
         toolbar.setNavigationOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
+
                 finish();
             }
         } );
@@ -83,9 +94,9 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
 
 
     @Override
-    public void showError( String string ) {
+    public void showError( String message ) {
         Context context = getApplicationContext();
-        CharSequence text = " ";
+        CharSequence text = message;
         int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText( context, text, duration );
         toast.show();

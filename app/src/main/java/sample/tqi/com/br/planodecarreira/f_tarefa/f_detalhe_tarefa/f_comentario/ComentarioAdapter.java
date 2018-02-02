@@ -42,7 +42,7 @@ public class ComentarioAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         Comentario comentario = comentarios.get(position);
         ComentarioAdapter.ViewHolderItem vhItem = (ComentarioAdapter.ViewHolderItem) holder;
 
-        vhItem.txtRemetente.setText(comentario.getRemtente());
+        vhItem.txtRemetente.setText(comentario.getRemetente());
         vhItem.txtComentario.setText(comentario.getComentario());
     }
 

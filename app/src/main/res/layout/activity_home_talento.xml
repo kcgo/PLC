@@ -38,7 +38,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:elevation="2dp">
+                 android:elevation="2dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -49,6 +49,7 @@
                         android:id="@+id/tv_modulo_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="Nome do módulo: "/>
 
                     <TextView
@@ -63,6 +64,7 @@
                         android:id="@+id/tv_data_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text="Data final: "
                         android:layout_below="@id/tv_modulo_title"/>
 
@@ -89,8 +91,13 @@
 
                     <Button
                         android:id="@+id/btn_task_home_talento"
+                        android:drawableBottom="@drawable/rounded_bg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryWhite"
+                        android:background="@color/ColorPrimaryBlue"
+                        android:padding="10dp"
+                        android:textSize="12dp"
                         android:layout_alignParentRight="true"
                         android:text="Tarefas"
                         android:layout_below="@id/tv_data_value"/>
@@ -102,7 +109,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Histórico de carreira"
+                android:text="Histórico da Carreira"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"/>
 

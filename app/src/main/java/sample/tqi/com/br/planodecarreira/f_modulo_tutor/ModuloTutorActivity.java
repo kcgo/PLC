@@ -40,15 +40,11 @@ public class ModuloTutorActivity extends AppCompatActivity implements ModuloTuto
     }
 
     private void initComponents() {
-
         findViewById();
 
-        toolbar.setTitle(getString(R.string.st_module));
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         waitDialog = new WaitDialog( this );
         presenter = new ModuloTutorPresenter();
-        presenter.attachView( this );
+        presenter.attachView(this);
         toolbar.setTitle( "Modulo vigente do talento" );
         setSupportActionBar( toolbar );
         getSupportActionBar().setDisplayHomeAsUpEnabled( true );

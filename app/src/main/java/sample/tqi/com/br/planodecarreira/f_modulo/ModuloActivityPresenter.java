@@ -27,7 +27,6 @@ public class ModuloActivityPresenter implements Presenter<ModuloView> {
     @Override
     public void attachView( ModuloView view ) {
         this.view = view;
-
     }
 
     @Override

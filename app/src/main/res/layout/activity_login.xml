@@ -9,7 +9,6 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
-
         <LinearLayout
             android:id="@+id/ln_layout_card"
             android:layout_width="match_parent"
@@ -55,7 +54,6 @@
                         android:digits=" 1234567890abcdefghijklmnopqrstuvxyz .  _"
                         />
 
-
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
@@ -63,7 +61,6 @@
                 android:id="@+id/ln_edit_text_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/text_input_senha"
@@ -78,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
-                        android:text="jgti2017"
+                        android:text=""
                         android:maxLength="30"
                         android:fontFamily="sans-serif"/>
 
@@ -96,7 +93,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
                     <CheckedTextView
                         android:id="@+id/recaptcha"
                         android:layout_width="wrap_content"
@@ -105,14 +101,14 @@
                         android:drawableLeft="@drawable/ic_nocaptcha"
                         android:text="Você é um humano?"
                         android:clickable="true"
-                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                        />
+                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"/>
 
                     <Switch
                         android:id="@+id/sw_salvar_usuario"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
+                        android:textColorHint="@color/ColorPrimaryBlue"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:checked="true"
@@ -125,11 +121,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:background="@drawable/rounded_bg"
-                    android:text="@string/acessar"
-                    android:textColor="@color/colorAccent" />
-
-
+                    android:elevation="4dp"
+                    android:drawableBottom="@drawable/rounded_bg"
+                    android:textColor="@color/colorPrimaryWhite"
+                    android:background="@color/ColorPrimaryBlue"
+                    android:text="@string/acessar"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

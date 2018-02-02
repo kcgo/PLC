@@ -11,7 +11,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import sample.tqi.com.br.planodecarreira.Presenter;
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.model.domain.Comentario;
+import sample.tqi.com.br.planodecarreira.model.domain.StatusTalento;
+import sample.tqi.com.br.planodecarreira.model.domain.StatusTutor;
 import sample.tqi.com.br.planodecarreira.model.service.ServiceGenerator;
 import sample.tqi.com.br.planodecarreira.model.service.TarefaApi;
 import sample.tqi.com.br.planodecarreira.util.DataStorage;
@@ -20,16 +21,15 @@ import sample.tqi.com.br.planodecarreira.util.DataStorage;
  * Created by katia.goncalves on 29/01/2018.
  */
 
-public class StatusTarefaPresenter implements Presenter<StatusTarefaView> {
+public class StatusTarefaPresenter implements Presenter <StatusTarefaView> {
     private StatusTarefaView view;
     private List <Subscription> subscriptionList = new ArrayList <>();
 
-
     @Override
     public void attachView( StatusTarefaView view ) {
-        this.view = view;
-
+        this.view=view;
     }
+
     @Override
     public void dettachView( Context context ) {
         this.view = null;
@@ -38,15 +38,35 @@ public class StatusTarefaPresenter implements Presenter<StatusTarefaView> {
         }
     }
 
-    public void postComentario( final Context context, Comentario comentario ) {
-
+    public void putAlterarStatusTutor( final Context context, StatusTutor statusTutor, int idTalento, int idModulo, int idTarefa) {
         final TarefaApi api = ServiceGenerator.create( TarefaApi.class, false, context );
 
-        Subscription subscription = api.postComentario( "Bearer " + DataStorage.getAccessToken(),comentario,2,1,1)
+        Subscription subscription = (Subscription) api.putAlterarStatusTutor( "Bearer" + DataStorage.getAccessToken(), statusTutor, idTalento, idModulo, idTarefa )
                 .subscribeOn( Schedulers.io() )
                 .observeOn( AndroidSchedulers.mainThread() )
-                .subscribe( stringResponse -> {
-                            view.showSuccess( null );
+                .subscribe( AlterarStatusTutor -> {
+                            view.showSucess( AlterarStatusTutor );
+                        },
+                        error -> {
+                            if (error instanceof HttpException) {
+                                view.showError( error.getMessage().toString() );
+                            } else {
+                                view.showError( context.getString( R.string.unknown_error ) );
+                            }
+                        } );
+        subscriptionList.add( subscription );
+
+
+    }
+
+    public void putAlterarStatusTalento( final Context context, StatusTalento statusTalento, int idModulo, int idTarefa) {
+        final TarefaApi api = ServiceGenerator.create( TarefaApi.class, false, context );
+
+        Subscription subscription = api.putAlterarStatusTalento( "Bearer" + DataStorage.getAccessToken(), statusTalento, idModulo, idTarefa)
+                .subscribeOn( Schedulers.io() )
+                .observeOn( AndroidSchedulers.mainThread() )
+                .subscribe( AlterarStatusTalento-> {
+                            view.showSucess( AlterarStatusTalento );
                         },
                         error -> {
                             if (error instanceof HttpException) {
@@ -57,6 +77,5 @@ public class StatusTarefaPresenter implements Presenter<StatusTarefaView> {
                         } );
         subscriptionList.add( subscription );
     }
-
 
 }

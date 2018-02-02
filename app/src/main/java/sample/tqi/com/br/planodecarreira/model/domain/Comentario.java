@@ -11,23 +11,24 @@ import java.io.Serializable;
 public class Comentario implements Serializable {
 
     @Expose
-    private String remtente;
+    private String remetente;
     @Expose
     private String comentario;
 
-    public String getRemtente() {
-        return remtente;
+    public String getRemetente() {
+        return remetente;
     }
 
-    public void setRemtente(String remtente) {
-        this.remtente = remtente;
+    public void setRemetente( String remtente ) {
+        this.remetente = remtente;
     }
 
     public String getComentario() {
         return comentario;
     }
 
-    public void setComentario(String comentario) {
+
+    public void setComentario( String comentario ) {
         this.comentario = comentario;
     }
 }

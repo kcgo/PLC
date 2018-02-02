@@ -12,4 +12,10 @@ public class Constants {
     public final static String UPDATE_DESC = "dtStatusUpdate,desc";
     public final static int PAGE_SIZE = 10;
 
+    public static class Alert {
+        public static String titleError = "Atenção";
+        public static String titleAtention = "Atenção";
+        public static String titleErrorService = "Atenção";
+        public static String titleOk = "Sucesso";
+    }
 }

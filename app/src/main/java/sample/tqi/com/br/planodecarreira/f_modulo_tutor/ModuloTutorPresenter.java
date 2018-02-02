@@ -24,9 +24,13 @@ public class ModuloTutorPresenter implements Presenter<ModuloTutorView> {
     private ModuloTutorView view;
     private List<Subscription> subscriptionList = new ArrayList<>();
 
+
+
     @Override
     public void attachView( ModuloTutorView view ) {
-        this.view = view;
+
+            this.view = view;
+
     }
 
     @Override
