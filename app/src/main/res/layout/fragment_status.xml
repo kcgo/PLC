@@ -20,26 +20,29 @@
             android:id="@+id/edt_txt_observacao_status"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:maxLines="10"/>
+            android:maxLength="300"/>
 
         <Button
             android:id="@+id/btn_enviar_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_bg"
             android:layout_gravity="right"
             android:visibility="gone"
             android:text="Enviar"/>
 
         <LinearLayout
             android:id="@+id/ln_botao_tutor"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_gravity="right">
 
             <Button
                 android:id="@+id/btn_rejeitar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_bg"
                 android:layout_gravity="right"
                 android:visibility="gone"
                 android:text="Rejeitar"/>
@@ -47,6 +50,7 @@
                 android:id="@+id/btn_aprovar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/rounded_bg"
                 android:layout_gravity="right"
                 android:visibility="gone"
                 android:text="Aprovar"/>

@@ -12,9 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import retrofit2.Response;
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.DetalheTarefaActivity;
 import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaActivity;
 import sample.tqi.com.br.planodecarreira.model.domain.AlterarStatusResponse;
 import sample.tqi.com.br.planodecarreira.model.domain.StatusTalento;
@@ -34,6 +32,7 @@ public class StatusFragment extends Fragment implements StatusTarefaView {
     private EditText edtObservacao;
     private Button btnEnviar;
     private Button btn_rejeitar;
+
     private Button btn_aprovar;
     private StatusTarefaPresenter presenter;
     private WaitDialog waitDialog;
@@ -90,14 +89,18 @@ public class StatusFragment extends Fragment implements StatusTarefaView {
                 presenter.putAlterarStatusTutor( getActivity(), statusTutor, tarefa.getId_talento().intValue(),tarefa.getId_modulo().intValue(),tarefa.getId_tarefa().intValue());
             }
         } );
+
         btnEnviar.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
-                waitDialog.show();
-                StatusTalento statusTalento = new StatusTalento();
-                statusTalento.setObservacao( edtObservacao.getText().toString() );
-                presenter.putAlterarStatusTalento( getActivity(), statusTalento,tarefa.getId_modulo().intValue(),tarefa.getId_tarefa().intValue() );
-
+                if (edtObservacao.getText().toString().trim().equals("")) {
+                    Toast.makeText( getContext(), "Campo Obrigatorio", Toast.LENGTH_SHORT ).show();
+                }else {
+                    waitDialog.show();
+                    StatusTalento statusTalento = new StatusTalento();
+                    statusTalento.setObservacao( edtObservacao.getText().toString() );
+                    presenter.putAlterarStatusTalento( getActivity(), statusTalento, tarefa.getId_modulo().intValue(), tarefa.getId_tarefa().intValue() );
+                }
             }
         } );
 
@@ -112,6 +115,7 @@ public class StatusFragment extends Fragment implements StatusTarefaView {
         btnEnviar = view.findViewById( R.id.btn_enviar_status );
         btn_rejeitar = view.findViewById( R.id.btn_rejeitar );
         btn_aprovar = view.findViewById( R.id.btn_aprovar );
+
     }
 
     @Override
@@ -120,7 +124,7 @@ public class StatusFragment extends Fragment implements StatusTarefaView {
         DialogInterface.OnClickListener positiveButton = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                getActivity().finish();
+                 getActivity().finish();
                 bundle = new Bundle();
                 bundle.putInt("idModulo", tarefa.getId_modulo().intValue());
                 Intent intent = new Intent(getActivity(), ListaTarefaActivity.class);
@@ -137,17 +141,20 @@ public class StatusFragment extends Fragment implements StatusTarefaView {
         DialogInterface.OnClickListener positiveButton = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                getActivity().finish();
-                bundle = new Bundle();
-                bundle.putInt("idModulo", tarefa.getId_modulo().intValue());
-                Intent intent = new Intent(getActivity(), ListaTarefaActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
+                        getActivity().finish();
+                        bundle = new Bundle();
+                        bundle.putInt("idModulo", tarefa.getId_modulo().intValue());
+                        Intent intent = new Intent(getActivity(), ListaTarefaActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+
+
+
         };
         AlertMessage.getInstance(getActivity()).showMessage(titleOk, "Status alterado com sucesso!",positiveButton);
-    }
 
+}
     @Override
     public void showError( String message ) {
         waitDialog.dismiss();

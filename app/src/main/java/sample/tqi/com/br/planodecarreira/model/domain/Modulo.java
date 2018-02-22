@@ -11,6 +11,7 @@ public class Modulo implements Serializable {
     private Long id_modulo;
     private Long id_talento;
     private String nome_modulo;
+    private String nome_tutor;
     private String tutor;
     private String nivel;
     private String area;
@@ -20,12 +21,11 @@ public class Modulo implements Serializable {
     private Integer tarefas_totais;
     private Integer tarefas_concluidas;
 
-
     public Long getId_modulo() {
         return id_modulo;
     }
 
-    public void setId_modulo(Long id_modulo) {
+    public void setId_modulo( Long id_modulo ) {
         this.id_modulo = id_modulo;
     }
 
@@ -33,7 +33,7 @@ public class Modulo implements Serializable {
         return id_talento;
     }
 
-    public void setId_talento(Long id_talento) {
+    public void setId_talento( Long id_talento ) {
         this.id_talento = id_talento;
     }
 
@@ -41,15 +41,23 @@ public class Modulo implements Serializable {
         return nome_modulo;
     }
 
-    public void setNome_modulo(String nome_modulo) {
+    public void setNome_modulo( String nome_modulo ) {
         this.nome_modulo = nome_modulo;
+    }
+
+    public String getNome_tutor() {
+        return nome_tutor;
+    }
+
+    public void setNome_tutor( String nome_tutor ) {
+        this.nome_tutor = nome_tutor;
     }
 
     public String getTutor() {
         return tutor;
     }
 
-    public void setTutor(String tutor) {
+    public void setTutor( String tutor ) {
         this.tutor = tutor;
     }
 
@@ -57,7 +65,7 @@ public class Modulo implements Serializable {
         return nivel;
     }
 
-    public void setNivel(String nivel) {
+    public void setNivel( String nivel ) {
         this.nivel = nivel;
     }
 
@@ -65,7 +73,7 @@ public class Modulo implements Serializable {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea( String area ) {
         this.area = area;
     }
 
@@ -73,7 +81,7 @@ public class Modulo implements Serializable {
         return data_inicio;
     }
 
-    public void setData_inicio(String data_inicio) {
+    public void setData_inicio( String data_inicio ) {
         this.data_inicio = data_inicio;
     }
 
@@ -81,7 +89,7 @@ public class Modulo implements Serializable {
         return data_fim;
     }
 
-    public void setData_fim(String data_fim) {
+    public void setData_fim( String data_fim ) {
         this.data_fim = data_fim;
     }
 
@@ -89,7 +97,7 @@ public class Modulo implements Serializable {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus( String status ) {
         this.status = status;
     }
 
@@ -97,7 +105,7 @@ public class Modulo implements Serializable {
         return tarefas_totais;
     }
 
-    public void setTarefas_totais(Integer tarefas_totais) {
+    public void setTarefas_totais( Integer tarefas_totais ) {
         this.tarefas_totais = tarefas_totais;
     }
 
@@ -105,7 +113,9 @@ public class Modulo implements Serializable {
         return tarefas_concluidas;
     }
 
-    public void setTarefas_concluidas(Integer tarefas_concluidas) {
+    public void setTarefas_concluidas( Integer tarefas_concluidas ) {
         this.tarefas_concluidas = tarefas_concluidas;
     }
+
+
 }

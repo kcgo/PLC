@@ -45,8 +45,8 @@ public class HomeTalentoPresenter implements Presenter<HomeTalentoView> {
         Subscription subscription = api.getModuloVigente("Bearer "+ DataStorage.getAccessToken())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(modulo -> {
-                            view.showSuccess(modulo);
+                .subscribe( modulo -> {
+                            view.showSuccess( modulo );
                         },
                         error -> {
                             if (error instanceof HttpException){

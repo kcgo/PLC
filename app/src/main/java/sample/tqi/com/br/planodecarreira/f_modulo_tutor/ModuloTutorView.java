@@ -12,6 +12,8 @@ public interface ModuloTutorView {
 
     void showError( String string );
 
-    void buildTarefaList( List<Tarefa> tarefas );
+    void buildTarefaList( List <Tarefa> tarefas );
+
 }
+
 

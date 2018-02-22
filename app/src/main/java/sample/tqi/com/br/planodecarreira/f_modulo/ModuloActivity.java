@@ -30,7 +30,6 @@ public class ModuloActivity extends AppCompatActivity implements ModuloView {
     private ModuloActivityPresenter presenter;
     private TextView txtDataInicial;
     private TextView txtDataFinal;
-    private TextView txtEstadoStatus;
     private TextView txtFeedback;
     private TextView txtNomeModulo;
     private TextView txtNomeTutor;
@@ -77,7 +76,6 @@ public class ModuloActivity extends AppCompatActivity implements ModuloView {
         recyclerView = (RecyclerView) findViewById( R.id.rv_modulo );
         txtDataInicial = (TextView) findViewById( R.id.tv_data_inicial );
         txtDataFinal = (TextView) findViewById( R.id.tv_data_final );
-        txtEstadoStatus = (TextView) findViewById( R.id.tv_estado_status );
         txtFeedback = (TextView) findViewById( R.id.tv_feedback );
         txtNomeModulo = (TextView) findViewById( R.id.tv_descricao_modulo );
         txtNomeTutor = (TextView) findViewById( R.id.tv_nome_tutor_modulo );
@@ -94,7 +92,7 @@ public class ModuloActivity extends AppCompatActivity implements ModuloView {
         txtNomeTutor.setText(modulo.getTutor());
         txtDataInicial.setText((modulo.getData_inicio() == null? "" : getDataConvert(modulo.getData_inicio())));
         txtDataFinal.setText((modulo.getData_fim() == null? "" : getDataConvert(modulo.getData_fim())));
-        txtEstadoStatus.setText(modulo.getStatus());
+
     }
 
     @Override
@@ -113,10 +111,6 @@ public class ModuloActivity extends AppCompatActivity implements ModuloView {
         toast.show();
     }
 
-    @Override
-    public void buildList( List <Modulo> modulos ) {
-
-    }
 
     @Override
     public void buildFeedBackList(List<Feedback> feedbacks) {

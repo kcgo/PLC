@@ -14,8 +14,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".f_login.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysVisible">
+            android:windowSoftInputMode="stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +28,10 @@
             android:name="io.fabric.ApiKey"
             android:value="160cade2f8d88b6ecd3a18088b1a621f65acc4da" />
 
-        <activity android:name=".f_Tutor.HomeTutorActivity"></activity>
+        <activity android:name=".f_Tutor.HomeTutorActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity
             android:name=".f_home_talento.HomeTalentoActivity"
             android:screenOrientation="portrait" />
@@ -43,7 +47,10 @@
         <activity
             android:name=".f_modulo.ModuloActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".f_modulo_tutor.ModuloTutorActivity"></activity>
+        <activity android:name=".f_modulo_tutor.ModuloTutorActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

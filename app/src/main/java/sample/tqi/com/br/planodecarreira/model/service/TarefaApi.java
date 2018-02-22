@@ -32,14 +32,13 @@ public interface TarefaApi {
                                                     @Path("idTalento") int idTalento,
                                                     @Path("idModulo") int idModulo );
 
-    @GET("avaliacao/{idTalento}/{idModulo}/tarefas/{idTarefa}/visaogeral")
+    @GET("avaliacao/{idTalento}/{idModulo}/tarefas/{idTarefa}")
     Observable <Tarefa> getTarefaVisaoGeral( @Header("Authorization") String authorization,
                                              @Path("idTalento") int idTalento,
                                              @Path("idModulo") int idModulo,
                                              @Path("idTarefa") int idTarefa );
 
-    @GET("http://demo5537570.mockable.io/planodecarreira/modulo/tarefa/visaogeral")
-    Observable <Tarefa> getTarefaStatus();
+
 
     @GET("avaliacao/{idTalento}/{idModulo}/tarefas/{idTarefa}/logs")
     Observable <List <Log>> getTarefaLogStatus( @Header("Authorization") String authorization,

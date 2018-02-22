@@ -12,4 +12,6 @@ public interface Presenter<V> {
 
     void dettachView( Context context );
 
+
+
 }

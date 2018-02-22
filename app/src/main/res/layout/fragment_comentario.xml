@@ -47,7 +47,7 @@
                 android:id="@+id/edt_txt_observacao_comentario"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:maxLines="10"/>
+                android:maxLength="300"/>
 
             <Button
                 android:id="@+id/btn_enviar_comentario"
@@ -57,9 +57,7 @@
                 android:padding="10dp"
                 android:textSize="12dp"
                 android:elevation="2dp"
-                android:drawableBottom="@drawable/rounded_bg"
-                android:textColor="@color/colorPrimaryWhite"
-                android:background="@color/ColorPrimaryBlue"
+                android:background="@drawable/rounded_bg"
                 android:text="Enviar"/>
 
         </LinearLayout>

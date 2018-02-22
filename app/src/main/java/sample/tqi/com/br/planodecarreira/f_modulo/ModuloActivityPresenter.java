@@ -38,26 +38,7 @@ public class ModuloActivityPresenter implements Presenter<ModuloView> {
 
     }
 
-//    @Override
-//    public void getModulo( final Context context ) {
-//
-//        final ModuloApi api = ServiceGenerator.create( ModuloApi.class, false, context );
-//
-//        Subscription subscription = api.getModulo( "Bearer " + DataStorage.getAccessToken() )
-//                .subscribeOn( Schedulers.io() )
-//                .observeOn( AndroidSchedulers.mainThread() )
-//                .subscribe( modulo -> {
-//                            view.showSuccess( modulo );
-//                        },
-//                        error -> {
-//                            if (error instanceof HttpException) {
-//                                view.showError( error.getMessage().toString() );
-//                            } else {
-//                                view.showError( context.getString( R.string.unknown_error ) );
-//                            }
-//                        } );
-//        subscriptionList.add( subscription );
-//    }
+
 
     public void getFeedback(final Context context, int idTalento, int idModulo) {
 

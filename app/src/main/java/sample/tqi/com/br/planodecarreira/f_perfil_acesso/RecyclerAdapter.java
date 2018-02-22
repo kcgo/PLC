@@ -6,9 +6,6 @@ package sample.tqi.com.br.planodecarreira.f_perfil_acesso;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,19 +14,18 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.f_Tutor.HomeTutorActivity;
 import sample.tqi.com.br.planodecarreira.f_home_talento.HomeTalentoActivity;
-import sample.tqi.com.br.planodecarreira.f_login.LoginActivity;
 import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 
 public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     Context context;
-    List<PerfilAcesso> perfilAcessos;
+    ArrayList<PerfilAcesso> perfilAcessos;
 
-    public RecyclerAdapter( Context context, List <PerfilAcesso> perfilAcessos){
+    public RecyclerAdapter( Context context, ArrayList <PerfilAcesso> perfilAcessos){
         this.context = context;
         this.perfilAcessos = perfilAcessos;
        }
@@ -50,9 +46,11 @@ public  class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewH
             if (perfilAcessos.get( position ).getDescription().equals( "Talento" )) {
 
                 Intent intentInstitutional = new Intent(context, HomeTalentoActivity.class);
+                intentInstitutional.putExtra( "lista", perfilAcessos );
                 context.startActivity(intentInstitutional);
             } else {
                 Intent intentNews = new Intent(context, HomeTutorActivity.class);
+                intentNews.putExtra( "lista", perfilAcessos );
                 context.startActivity(intentNews);
             }
         });

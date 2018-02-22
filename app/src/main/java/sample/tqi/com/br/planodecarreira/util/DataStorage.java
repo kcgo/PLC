@@ -20,6 +20,15 @@ public class DataStorage {
         editor.putString(ACCESS_TOKEN, token);
         editor.commit();
     }
+    public static void setRefreshToken(String token ){
+
+        SharedPreferences sharedPreferences = PlanoCarreiraApplication.get().getSharedPreferences( PLC_PREFERENCE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString( REFRESH_TOKEN,null);
+        editor.commit();
+
+
+    }
 
     public static String getAccessToken() {
         SharedPreferences sharedPreferences = PlanoCarreiraApplication.get().getSharedPreferences(PLC_PREFERENCE, Context.MODE_PRIVATE);

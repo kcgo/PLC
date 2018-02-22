@@ -34,7 +34,7 @@
             android:layout_height="150dp"
             android:text=""
             android:enabled="false"
-            android:maxLines="10"/>
+            android:maxLength="300"/>
 
     </LinearLayout>
 </FrameLayout>

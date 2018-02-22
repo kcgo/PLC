@@ -1,11 +1,15 @@
 package sample.tqi.com.br.planodecarreira.f_Tutor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
+import sample.tqi.com.br.planodecarreira.f_login.LoginActivity;
+import sample.tqi.com.br.planodecarreira.f_perfil_acesso.PerfilAcessoActivity;
 import sample.tqi.com.br.planodecarreira.model.domain.Talento;
 import sample.tqi.com.br.planodecarreira.ui.WaitDialog;
 
@@ -39,14 +45,14 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
         initComponents();
 
         presenter = new HomeTutorPresenter();
-        presenter.attachView(this);
-        presenter.saveTypeAccess("tutor");
+        presenter.attachView( this );
+        presenter.saveTypeAccess( "tutor" );
         presenter.getHomeTutor( HomeTutorActivity.this, "todos" );
         estado.add( "Avaliação" );
         estado.add( "Concluídos" );
         estado.add( "Todos" );
 
-        ArrayList<String> optionsAction = new ArrayList<String>();
+        ArrayList <String> optionsAction = new ArrayList <String>();
         optionsAction.add( "avaliacao" );
         optionsAction.add( "concluidos" );
         optionsAction.add( "todos" );
@@ -64,7 +70,7 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
                 //pega nome pela posição
 
 //                status = parent.getItemAtPosition( posicao ).toString();
-                status = optionsAction.get(posicao).toString();
+                status = optionsAction.get( posicao ).toString();
                 presenter.getHomeTutor( getApplicationContext(), status );
             }
 
@@ -75,13 +81,15 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
 
         } );
     }
+
+
     private void initComponents() {
 
         toolbar = findViewById( tb_activity_talentos );
-        toolbar.setTitle( "Home" );
+        toolbar.setTitle( "Home Tutor" );
         toolbar.getContentInsetStartWithNavigation();
         setSupportActionBar( toolbar );
-        getSupportActionBar().setDisplayHomeAsUpEnabled( true );
+        //getSupportActionBar().setDisplayHomeAsUpEnabled( true );
 
         toolbar.setNavigationOnClickListener( new View.OnClickListener() {
             @Override
@@ -91,6 +99,34 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
             }
         } );
     }
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu ) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate( R.menu.menu, menu );
+        return super.onCreateOptionsMenu( menu );
+    }
+
+    @Override
+
+    public boolean onOptionItemSelected( MenuItem item ) {
+        return super.onOptionsItemSelected( item );
+    }
+
+    public void sair(MenuItem item){
+        Intent intent  = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    @Override
+    public void AlterarPerfil( MenuItem item ) {
+        Intent intent  = new Intent(this, PerfilAcessoActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
 
 
     @Override
@@ -109,6 +145,8 @@ public class HomeTutorActivity extends AppCompatActivity implements Serializable
         RecyclerView.LayoutManager layout = new LinearLayoutManager( this, LinearLayoutManager.VERTICAL, false );
         recyclerView.setLayoutManager( layout );
     }
+
+
 }
 
 

@@ -11,6 +11,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import sample.tqi.com.br.planodecarreira.Presenter;
 import sample.tqi.com.br.planodecarreira.R;
+import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 import sample.tqi.com.br.planodecarreira.model.service.PerfilAcessoApi;
 import sample.tqi.com.br.planodecarreira.model.service.ServiceGenerator;
 import sample.tqi.com.br.planodecarreira.util.DataStorage;
@@ -44,7 +45,7 @@ public class PerfilAcessoPresenter implements Presenter<PerfilAcessoView> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(listaPerfil -> {
-                            view.buildAdapter(listaPerfil);
+                            view.buildAdapter( (ArrayList <PerfilAcesso>) listaPerfil );
                         },
                         error -> {
                             if (error instanceof HttpException) {

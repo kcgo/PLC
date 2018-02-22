@@ -254,8 +254,8 @@ public class UIUtil {
         }
     }
 
-    //Função retorna a data no formato  - de yyyy-MM-dd para dd/MM/yyyy - 22-10-2017
-    public static String getDataConvert (String sdata) {
+   // Função retorna a data no formato  - de yyyy-MM-dd para dd/MM/yyyy - 22-10-2017
+   public static String getDataConvert (String sdata) {
         try {
             DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
             DateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");

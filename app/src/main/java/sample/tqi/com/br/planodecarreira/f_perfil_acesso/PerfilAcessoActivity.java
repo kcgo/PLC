@@ -8,12 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.f_Tutor.HomeTutorActivity;
 import sample.tqi.com.br.planodecarreira.f_home_talento.HomeTalentoActivity;
 import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 
 public class PerfilAcessoActivity extends Activity implements PerfilAcessoView {
 
@@ -39,16 +41,23 @@ public class PerfilAcessoActivity extends Activity implements PerfilAcessoView {
     }
 
     @Override
-    public void buildAdapter( List <PerfilAcesso> lista ) {
+    public void buildAdapter( ArrayList<PerfilAcesso> lista ) {
         if (lista.size() == 1) {
             if (lista.get( 0 ).getDescription().equals( "Talento" )) {
-                Intent intent = new Intent( getApplicationContext(), HomeTalentoActivity.class );
-                startActivity( intent );
+                Intent intent  = new Intent(this, HomeTalentoActivity.class);
+                intent.putExtra( "lista", lista );
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
+
             } else {
-                Intent intent = new Intent( getApplicationContext(), HomeTutorActivity.class );
-                startActivity( intent );
+                Intent intent  = new Intent(this, HomeTutorActivity.class);
+                intent.setFlags (FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity(intent);
                 finish();
+
             }
         }
         RecyclerView recyclerView = (RecyclerView) findViewById( R.id.rv_perfil );

@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,9 +80,13 @@ public class ComentarioFragment extends Fragment implements ComentarioView{
     }
     private void setUpAction(){
         btn_enviar_comentario.setOnClickListener( ( View v ) -> {
-            Comentario comentario = new Comentario();
-            comentario.setComentario(edtObservacao.getText().toString());
-            presenter.postComentario( getActivity(), comentario, tarefa );
+            if (edtObservacao.getText().toString().trim().equals("")) {
+                Toast.makeText( getContext(), "Campo Obrigatorio", Toast.LENGTH_SHORT ).show();
+            }else {
+                Comentario comentario = new Comentario();
+                comentario.setComentario( edtObservacao.getText().toString() );
+                presenter.postComentario( getActivity(), comentario, tarefa );
+            }
         } );
     }
 

@@ -17,6 +17,7 @@ public interface ModuloApi {
     @GET("http://10.10.0.46:8080/avaliacao/modulos?filtro=concluidos")
     public Observable<Modulo> getModulo( @Header("Authorization") String authorization );
 
+
     @GET("avaliacao/{idTalento}/{idModulo}/feedbacks")
     Observable<List<Feedback>> getFeedback(@Header("Authorization") String authorization,
                                            @Path("idTalento") int idTalento,

@@ -14,7 +14,7 @@ public interface ModuloView {
 
     void showError( String string );
 
-    void buildList( List<Modulo> modulos );
+
 
     void buildFeedBackList( List<Feedback> feedbacks );
 

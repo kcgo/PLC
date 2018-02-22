@@ -48,10 +48,10 @@
                         android:id="@+id/edit_text_usuário"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textEmailAddress"
                         android:orientation="horizontal"
                         android:fontFamily="sans-serif"
-                        android:digits=" 1234567890abcdefghijklmnopqrstuvxyz .  _"
+                        android:inputType="textNoSuggestions"
+                        android:digits="1234567890abcdefghijklmnopqrstuvxyz._"
                         />
 
                 </android.support.design.widget.TextInputLayout>
@@ -122,9 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:elevation="4dp"
-                    android:drawableBottom="@drawable/rounded_bg"
-                    android:textColor="@color/colorPrimaryWhite"
-                    android:background="@color/ColorPrimaryBlue"
+                    android:background="@drawable/rounded_bg"
                     android:text="@string/acessar"/>
             </LinearLayout>
         </LinearLayout>

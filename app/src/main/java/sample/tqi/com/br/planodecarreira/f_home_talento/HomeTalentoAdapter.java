@@ -14,9 +14,8 @@ import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
 import sample.tqi.com.br.planodecarreira.f_modulo.ModuloActivity;
+import sample.tqi.com.br.planodecarreira.f_tarefa.f_lista_tarefa.ListaTarefaActivity;
 import sample.tqi.com.br.planodecarreira.model.domain.Modulo;
-
-import static sample.tqi.com.br.planodecarreira.util.UIUtil.getDataConvert;
 
 /**
  * Created by alexandre.azevedo on 15/01/2018.
@@ -25,6 +24,7 @@ import static sample.tqi.com.br.planodecarreira.util.UIUtil.getDataConvert;
 public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private LayoutInflater mLayoutInflater;
     private Context context;
+    private Button btn_tarefas;
     private Bundle bundle;
     private List<Modulo> modulos;
     private Long idTalento;
@@ -35,6 +35,7 @@ public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.modulos = modulos;
         this.idTalento =idtalento;
     }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,22 +52,30 @@ public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         ViewHolderItem vhItem = (ViewHolderItem) holder;
 
         vhItem.txtModulo.setText(modulo.getNome_modulo());
-        vhItem.txtDataFinal.setText((modulo.getData_fim() == null? "" : getDataConvert(modulo.getData_fim())));
+       // vhItem.txtDataFinal.setText((modulo.getData_fim() == null? "" : getDataConvert(modulo.getData_fim())));
+        vhItem.txtDataFinal.setText( modulo.getData_fim() );
         vhItem.txtNivel.setText(modulo.getNivel());
         vhItem.txtArea.setText(modulo.getArea());
 
-        vhItem.btnDesc.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                bundle = new Bundle();
-                bundle.putSerializable("modulo", modulo);
-                Intent intent = new Intent(context, ModuloActivity.class);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-            }
-        });
+        vhItem.btnDesc.setOnClickListener( view -> {
+            bundle = new Bundle();
+            bundle.putSerializable("modulo", modulo);
+            Intent intent = new Intent(context, ModuloActivity.class);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        } );
+
+      vhItem.btn_tarefas.setOnClickListener( v -> {
+          bundle = new Bundle();
+          bundle.putInt( "idModulo", modulo.getId_modulo().intValue() );
+          Intent intent = new Intent( context.getApplicationContext(), ListaTarefaActivity.class );
+          intent.putExtras( bundle );
+          context.startActivity(intent);
+      } );
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -79,9 +88,13 @@ public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public TextView txtDataFinal;
         public TextView txtNivel;
         public TextView txtArea;
+        public View btn_tarefas;
+        public View txtNomeTutor;
 
         public ViewHolderItem(View itemView) {
             super(itemView);
+                btn_tarefas = (Button) itemView.findViewById(R.id.btn_tarefas );
+                txtNomeTutor= (TextView) itemView.findViewById(R.id.tv_nome_tutor );
                 btnDesc = (Button) itemView.findViewById(R.id.btn_desc);
                 txtModulo = (TextView) itemView.findViewById(R.id.txt_modulo_career_history);
                 txtDataFinal = (TextView) itemView.findViewById(R.id.txt_data_final_career_history);
@@ -89,4 +102,5 @@ public class HomeTalentoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 txtArea = (TextView) itemView.findViewById(R.id.txt_area_career_history);
         }
     }
+
 }

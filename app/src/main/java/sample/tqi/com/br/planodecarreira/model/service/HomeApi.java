@@ -6,7 +6,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import rx.Observable;
 import sample.tqi.com.br.planodecarreira.model.domain.Modulo;
-import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 
 /**
  * Created by alexandre.azevedo on 18/01/2018.

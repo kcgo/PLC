@@ -114,4 +114,6 @@ public class ModuloTutorActivity extends AppCompatActivity implements ModuloTuto
             recyclerView.setVisibility( View.GONE );
         }
     }
+
+
 }

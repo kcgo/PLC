@@ -43,8 +43,7 @@
                 android:layout_height="match_parent"
                 android:padding="10dp"
                 android:textSize="12dp"
-                android:textColor="@color/colorPrimaryWhite"
-                android:background="@color/ColorPrimaryBlue"
+                android:background="@drawable/rounded_bg"
                 android:layout_gravity="right"
                 android:text="Descrição"/>
         </LinearLayout>

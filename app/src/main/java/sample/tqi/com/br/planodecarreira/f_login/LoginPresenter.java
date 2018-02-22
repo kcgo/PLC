@@ -44,16 +44,17 @@ public class LoginPresenter implements Presenter<LoginView> {
 
         final UserApi api = ServiceGenerator.create(UserApi.class, false, context);
 
-        Subscription subscription = api.login(getAuthorization(), username, password, Constants.GRANT_PASSWORD)
+        Subscription subscription = api.login(getAuthorization(),username, password, Constants.GRANT_PASSWORD)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(( AuthTokenResponse user ) -> {
                             DataStorage.setAccessToken(user.getAccessToken());
+                            DataStorage.setRefreshToken( user.getRefreshToken());
                             view.showSuccess();
                         },
                         error -> {
                             if (error instanceof HttpException){
-                                view.showError(context.getString(R.string.credentials_invalid));
+                                view.showError("Informar Usuário e Senha");
                             } else {
                                 view.showError(context.getString(R.string.unknown_error));
                             }
@@ -74,10 +75,10 @@ public class LoginPresenter implements Presenter<LoginView> {
                 .subscribe(user -> {
                             view.showSuccess();
                         },
-                        error -> {
-                            if (error instanceof HttpException){
-                                view.showError(context.getString(R.string.credentials_invalid));
-                            } else {
+                        ( Throwable error ) -> {
+                            if (error instanceof HttpException)
+                                view.showError( "Usuario e/ou Senha incorretos" );
+                            else {
                                 view.showError(context.getString(R.string.unknown_error));
                             }
                         });

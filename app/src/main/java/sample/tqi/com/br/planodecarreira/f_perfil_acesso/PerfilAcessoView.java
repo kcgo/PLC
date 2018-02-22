@@ -1,8 +1,6 @@
 package sample.tqi.com.br.planodecarreira.f_perfil_acesso;
 
-import android.content.Context;
-
-import java.util.List;
+import java.util.ArrayList;
 
 import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 
@@ -13,6 +11,6 @@ import sample.tqi.com.br.planodecarreira.model.domain.PerfilAcesso;
 public interface PerfilAcessoView {
     void showError( String string );
 
-     void buildAdapter( List <PerfilAcesso> lista);
+     void buildAdapter( ArrayList <PerfilAcesso> lista);
 
 }

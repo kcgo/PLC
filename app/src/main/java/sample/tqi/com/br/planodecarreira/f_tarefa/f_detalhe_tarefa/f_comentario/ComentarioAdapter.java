@@ -10,9 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import sample.tqi.com.br.planodecarreira.R;
-import sample.tqi.com.br.planodecarreira.f_tarefa.f_detalhe_tarefa.f_log.LogAdapter;
 import sample.tqi.com.br.planodecarreira.model.domain.Comentario;
-import sample.tqi.com.br.planodecarreira.model.domain.Log;
 
 /**
  * Created by alexandre.azevedo on 17/01/2018.
